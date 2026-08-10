@@ -97,8 +97,8 @@ plot.det <- ggplot(
 
 plot(plot.det)
 
-ggsave("./figures/manuscript/Fig.2-det-line.png", dpi = res, w=w, h=h, units = "in")
-ggsave("./figures/manuscript/Fig.2-det-line.pdf", dpi = res, w=w, h=h, units = "in")
+ggsave("./figures/Fig.2-det-line.png", dpi = res, w=w, h=h, units = "in")
+ggsave("./figures/Fig.2-det-line.pdf", dpi = res, w=w, h=h, units = "in")
 
 
 #plot 13C-rhizo
@@ -147,8 +147,8 @@ plot.rhiz <- ggplot(
   )
 
 plot(plot.rhiz)
-ggsave("./figures/manuscript/Fig.2-rhizo-line.png", dpi = res, w=w, h=h, units = "in")
-ggsave("./figures/manuscript/Fig.2-rhizo-line.pdf", dpi = res, w=w, h=h, units = "in")
+ggsave("./figures/Fig.2-rhizo-line.png", dpi = res, w=w, h=h, units = "in")
+ggsave("./figures/Fig.2-rhizo-line.pdf", dpi = res, w=w, h=h, units = "in")
 
 
 

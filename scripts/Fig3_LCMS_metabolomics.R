@@ -77,14 +77,14 @@ class_hierarchy <- data.frame(
 
 
 ##load LC-MS data
-file_path <- "./data/manuscript/DRIPSIP_LC_Metab_WK_CleanedUp.xlsx"
+file_path <- "./data/LC_MS_metabolomics.xlsx"
 #kegg <- read.csv("./qSIP_output/LC-MS/HPOS_metaboanalyst_KEGGID_all.csv", header = TRUE)
 #kegg$Query <- gsub(" ", "_", kegg$Query) 
 
 
 ##load extra functions
-source("./scripts/manuscript/functions/extra_functions_PCA_NMDS_plotting.R")
-source("./scripts/manuscript/functions/lc-ms-functions.R")
+source("./scripts/functions/NMDS_plotting_functions.R")
+source("./scripts/functions/lcms_functions.R")
 
 # Get sheet names
 sheet_names <- excel_sheets(file_path)
@@ -483,6 +483,8 @@ h_object_groups_log2 <- applyFilt(filter_object = myfilter,
                                   omicsData = h_object_groups_log2, pvalue_threshold = 0.00000001)
 summary(h_object_groups_log2)
 
+#no samples filtered
+
 #numeric summary
 edata_summary(h_object_groups_log2, by = "molecule", groupvar = NULL)
 
@@ -644,11 +646,10 @@ df.sig <- df %>%
 
 
 #save normalized and z-scaled dataframes
-# write.csv(df, "./output/manuscript/lcms_met_h_norm.csv")
-# write.csv(df.z, "./output/manuscript/lcms_met_h_norm_z_score.csv")
+write.csv(df, "./output/LCMS/lcms_met_h_norm.csv")
 
 #load csv
-df <- read.csv("./output/manuscript/lcms_met_h_norm.csv", header = TRUE) %>%
+df <- read.csv("./output/LCMS/lcms_met_h_norm.csv", header = TRUE) %>%
   column_to_rownames(var = "X")
 
 
@@ -677,7 +678,7 @@ df.z.sig <- as.data.frame(t(scale(t(df.sig))))
 # PRODUCE HEATMAPS
 # ══════════════════════════════════════════════════════════════════════════════
 
-outdir <- "./manuscript/"
+outdir <- "./figures/Fig3_FigSx_LCMS"
 
 # ── Compute global color scale across all datasets ────────────────────────────
 # Do this BEFORE calling make_all_heatmaps
@@ -711,7 +712,7 @@ make_all_heatmaps(
   timepoint_colors       = timepoint_colors,
   outdir = outdir,
   #cluster_rows = TRUE,
-  label  = "lcms-h-all-timepoints",
+  label  = "other/lcms-h-met-all-timepoints",
   breaks = global_breaks
 )
 
@@ -752,57 +753,89 @@ for (tp in timepoints) {
     treatment_colors       = tp_treatment_colors,
     timepoint_colors       = NULL,   # not shown within a single timepoint
     outdir = outdir,
-    label  = paste0("Fig.3-lcms-h-heatmaps", tp),
+    label  = paste0(tp),
     width = 15, height_all = 13, height_sig = 8,
     breaks = global_breaks
   )
+  
+  # Extract the hclust object from pheatmap
+  heatmap_obj <- pheatmap(df_z_sig_tp, 
+                          clustering_method = "complete",
+                          silent = TRUE)
+  
+  # Get k value for this timepoint
+  k <- k_values[[tp]]
+  
+  # Cut the row dendrogram using timepoint-specific k
+  clusters <- cutree(heatmap_obj$tree_row, k = k)
+  
+  # See which lipids are in each cluster
+  cluster_df <- data.frame(lipid = names(clusters), cluster = clusters) %>%
+    arrange(cluster)
+  
+  # Add cluster membership back to your data
+  df_z_sig_tp$cluster <- clusters
+  
+  df_z_sig_tp <- df_z_sig_tp %>%
+    select(cluster)
+  
+  write.csv(df_z_sig_tp, paste0("./output/LCMS/",
+                                tp, "_met_clusters.csv"))
 }
 
+#extract compounds from each cluster at each timepoint and associate with habitat
+#4 weeks
+week.4 <- read.csv("./output/LCMS/4weeks_met_clusters.csv")
+
+rhizo.4 <- week.4 %>%
+  filter(cluster==2 |
+           cluster==2 |
+           cluster==5)
+rhizo.4 <- rhizo.4$X
+
+det.4 <- week.4 %>%
+  filter(cluster==1 |
+           cluster==6)
+det.4 <- det.4$X
+
+rhizodet.4 <- det.4
+
+#8 weeks
+week.8 <- read.csv("./output/LCMS/8weeks_met_clusters.csv")
+
+rhizo.8 <- week.8 %>%
+  filter(cluster==2)
+
+rhizo.8 <- rhizo.8$X
+
+det.8 <- week.8 %>%
+  filter(cluster==1 |
+           cluster==3 |
+           cluster==4)
+det.8 <- det.8$X
+
+rhizodet.8 <- det.8
+
+#12 weeks
+week.12 <- read.csv("./output/LCMS/12weeks_met_clusters.csv")
+
+rhizo.12 <- week.12 %>%
+  filter(cluster==1 |
+           cluster==2)
+
+rhizo.12 <- rhizo.12$X
+
+det.12 <- week.12 %>%
+  filter(cluster==3 |
+           cluster==4)
+det.12 <- det.12$X
+
+rhizodet.12 <- rhizo.12
 
 ###extract kegg ids for compounds associated with each habitat:
 kegg_ids <- rbind(compound.class.neg, compound.class.pos) 
 
-#define metabolites associated with each time period and habitat
-rhizo.12 <- c("Guanine", "Hypoxanthine", "3-Hydroxybutyricacid", 
-           "Mevalolactone", "L-Phenylalanyl-L-proline", "Leucylproline",
-           "Adenine", "DL-Isoleucine", "Butanoylcarnitine", "Pantolactone",
-           "2,4-Bis(2-methylbutan-2-yl)phenol",
-           "9R-hydroxy-10E,12E-octadecadienoicacid,methylester",
-           "Linoleicacid", "Oleicacid", "Leucyl-Valine",
-           "2-Ethylhexanoicacid", "Indole-3-aldehyde")
 
-det.12 <- c("PE-Nme", "PE2", 
-           "Stachydrine", "Sugars-Disaccharides", "Adenosine",
-           "L-Citrulline", "Sugars-Trisaccharides", "Choline",
-           "Carnitine", "PE1", "PE3", "Prolylglycine", "Uracil",
-           "DL-Carnitine", "Nalpha-acetyl-L-Lysine", "Acetyl-DL-carnitine")
-
-rhizo.det.12 <- rhizo.12
-
-rhizo.8 <- c("Pantolactone", "Hypoxanthine", 
-             "Mevalolactone", "L-Phenylalanyl-L-proline", "Leucylproline",
-             "Adenine","Guanine", "DL-Isoleucine", "3-Hydroxybutyricacid",
-             "Butanoylcarnitine", "Indole-3-aldehyde","LinoleicAcid",
-             "Oleicacid", "9R-hydroxy-10E,12E-octadecadienoicacid,methylester")
-             
-
-det.8 <- c("Acetyl-DL-carnitine", "Stachydrine", "Sugars-Disaccharides",
-           "Sugars-Trisaccharides", 
-           "L-Citrilline", "Leucyl-Valine", "Prolyglycine", "PE1", "PE3",
-           "PE-Nme", "PE2", "2-Ethylhexanoicacid", "Choline", "Adenosine",
-           "Carnitine", "DL-Carnitine", "Nalpha-aceytl-L-Lysine")
-
-rhizo.det.8 <- det.8
-
-rhizo.4 <- c("Adenosine","L-Citrulline","Sugars-Disaccharides","Sugars-Trisaccharides", 
-             "PE2","PE-Nme","PE1", "PE2", "Prolyglycine", "Pantolactone", 
-             "9R-hydroxy-10E,12E-octadecadienoicacid,methylester", "Mevalolactone",
-             "L-Phenylalanyl-L-proline", "Leucylproline",
-             "Hypoxanthine", "Adenine")
-
-det.4 <- c("Stachydrine", "3-Hydroxybutyricacid", "3-Ethylhexanoicacid")
-
-rhizo.det.4 <- det.4
 #filter kegg ids to each list above
 #12 weeks
 kegg_ids_rhizo.12 <- kegg_ids %>%
@@ -869,6 +902,7 @@ kegg_ids_det.4.no.na <- kegg_ids_det.4 %>%
 
 kegg_ids_rhizo.det.4 <- kegg_ids_det.4 %>%
   mutate(habitat = "RhizoDet")
+
 
 
 #run clusster profiler to find enriched pathways
@@ -950,10 +984,10 @@ kegg_ids.plot <- kegg_ids_combined %>%
   scale_fill_manual(values = superclass_base_colors) +
   theme_bw() +
   theme(panel.grid = element_blank())
-ggsave("./figures/LC-MS/manuscript/Fig.3e-class-time.png", dpi = 300,
+ggsave("./figures/Fig3_FigSx_LCMS/Fig3e_class_time.png", dpi = 300,
       height = 3, width = 6, units = "in")
 
-ggsave("./figures/LC-MS/manuscript/Fig.3e-class-time.pdf", dpi = 300,
+ggsave("./figures/Fig3_FigSx_LCMS/Fig3e_class_time.pdf", dpi = 300,
        height = 3, width = 6, units = "in")
 
 
@@ -995,17 +1029,17 @@ w=12
 h=8
 nmds_plot <-  make_nmds_plot(data.scores, Zone, Treatment, col_list = zone_colors)
 nmds_plot
-filename <- paste0("./figures/manuscript/Fig.3-h-nmds.png")
+filename <- paste0("./figures/Fig3_FigSx_LCMS/Fig3_met_nmds.png")
 ggsave(filename,units=c('in'),width=w,height=h,dpi=res,nmds_plot)
-filename <- paste0("./figures/manuscript/Fig.3-h-nmds.pdf")
+filename <- paste0("./figures/Fig3_FigSx_LCMS/Fig3_met_nmds.pdf")
 ggsave(filename,units=c('in'),width=w,height=h,dpi=res,nmds_plot)
 
 
 
-### nmds plot (treatment and zone)
+### nmds plot (time and treatment)
 nmds_plot <-  make_nmds_plot(data.scores, Time, Treatment, col_list = timepoint_colors)
 nmds_plot
-filename <- paste0("./figures/manuscript/h-nmds-timepoint-treatment.png")
+filename <- paste0("./figures/Fig3_FigSx_LCMS/other/met-nmds-timepoint-treatment.png")
 ggsave(filename,units=c('in'),width=w,height=h,dpi=res,nmds_plot)
 
 #permanova

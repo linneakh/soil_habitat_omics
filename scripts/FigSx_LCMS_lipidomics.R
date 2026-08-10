@@ -710,7 +710,7 @@ for (tp in timepoints) {
   
   # Extract the hclust object from pheatmap
   heatmap_obj <- pheatmap(df_z_sig_tp, 
-                          clustering_method = "ward.D2",
+                          clustering_method = "complete",
                           silent = TRUE)
   
   # Get k value for this timepoint

@@ -295,27 +295,27 @@ make_all_heatmaps <- function(df_z, df_z_sig, meta, meta.comp,
   meta_aligned_sig <- meta[colnames(df_z_sig), , drop = FALSE]
   
   plots <- list(
-    list(fp = file.path(outdir, paste0(label, "-superclass.pdf")),
+    list(fp = file.path(outdir, paste0("other/", label, "_met-superclass.pdf")),
          data = df_z,     ann_col = meta_aligned,     ann_row = ann$meta_sup,
          ann_colors = ann$ann_sup,     h = height_all, sig = FALSE),
     
-    list(fp = file.path(outdir, paste0(label, "-superclass-sig.pdf")),
+    list(fp = file.path(outdir, paste0("Fig3_", label, "_met-superclass-sig.pdf")),
          data = df_z_sig, ann_col = meta_aligned_sig, ann_row = ann_sig$meta_sup,
          ann_colors = ann_sig$ann_sup, h = height_sig, sig = TRUE),
     
-    list(fp = file.path(outdir, paste0(label, "-mainclass.pdf")),
+    list(fp = file.path(outdir, paste0("other/",label, "_met-mainclass.pdf")),
          data = df_z,     ann_col = meta_aligned,     ann_row = ann$meta_class,
          ann_colors = ann$ann_cls,     h = height_all, sig = FALSE),
     
-    list(fp = file.path(outdir, paste0(label, "-mainclass-sig.pdf")),
+    list(fp = file.path(outdir, paste0("other/",label, "_met-mainclass-sig.pdf")),
          data = df_z_sig, ann_col = meta_aligned_sig, ann_row = ann_sig$meta_class,
          ann_colors = ann_sig$ann_cls, h = height_sig, sig = TRUE),
     
-    list(fp = file.path(outdir, paste0(label, "-subclass.pdf")),
+    list(fp = file.path(outdir, paste0("other/",label, "_met-subclass.pdf")),
          data = df_z,     ann_col = meta_aligned,     ann_row = ann$meta_subclass,
          ann_colors = ann$ann_sub,     h = height_all, sig = FALSE),
     
-    list(fp = file.path(outdir, paste0(label, "-subclass-sig.pdf")),
+    list(fp = file.path(outdir, paste0("other/",label, "_met-subclass-sig.pdf")),
          data = df_z_sig, ann_col = meta_aligned_sig, ann_row = ann_sig$meta_subclass,
          ann_colors = ann_sig$ann_sub, h = height_sig, sig = TRUE)
   )
