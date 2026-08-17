@@ -1,0 +1,76 @@
+KO,Enzyme,Litter_Component,Stage,Tier_Justification,Source
+K06113,Endo-1-5-alpha-L-arabinanase,Arabinan,Early,Hydrolyzes arabinan backbone,Original
+K01209,Alpha-L-arabinofuranosidase,Arabinan,Early,Removes arabinose from arabinan and arabinoxylan,Original
+K15921,Arabinoxylan arabinofuranohydrolase,Arabinan,Early,Hydrolyzes arabinose from arabinoxylan,Original
+K20844,Alpha-L-arabinofuranosidase,Arabinan,Early,Arabinose removal from polysaccharides,Original
+K01224,Arabinogalactan endo-beta-1-4-galactanase,Arabinogalactan,Early,Cleaves galactan in arabinogalactan,Original
+K01179,Endoglucanase (cellulase),Cellulose,Mid-Late,Endo-hydrolysis of cellulose; random internal cleavage,Original
+K19357,Endoglucanase (cellulase),Cellulose,Mid-Late,Alternative endoglucanase,Original
+K01225,Cellobiohydrolase (CBH1),Cellulose,Mid-Late,Exo-hydrolysis from reducing end; releases cellobiose,Original
+K19668,Cellobiohydrolase (CBH2),Cellulose,Mid-Late,Exo-hydrolysis from non-reducing end,Original
+K01188,Beta-glucosidase,Cellulose,Late,Hydrolyzes cellobiose to glucose; final step in cellulose degradation,Original
+K05349,Beta-glucosidase,Cellulose,Late,Alternative beta-glucosidase; broad substrate range,Original
+K05350,Beta-glucosidase,Cellulose,Late,Additional beta-glucosidase isoform,Original
+K19356,Lytic cellulose monooxygenase (LPMO),Cellulose,Mid-Late,Oxidative cleavage of cellulose; enhances cellulase activity,Original
+K20829,Cellulose 1-4-beta-cellobiosidase,Cellulose,Mid-Late,Releases cellobiose from cellulose,Original
+K22032,Cellulose monooxygenase,Cellulose,Mid-Late,Oxidative cellulose degradation,Original
+K22033,Cellulose monooxygenase,Cellulose,Mid-Late,Alternative LPMO,Original
+K19354,Swollenin,Cellulose,Mid,Non-hydrolytic cellulose disruption; enhances accessibility,Added
+K22034,Cellobiose dehydrogenase,Cellulose,Mid-Late,Electron donor for LPMOs; also involved in lignin degradation,New_Addition
+K01183,Endochitinase,Chitin,Mid-Late,Endo-hydrolysis of chitin; fungal and arthropod litter,Added
+K20547,Chitobiosidase,Chitin,Mid-Late,Exo-hydrolysis of chitin; releases chitobiose,Added
+K01207,Beta-N-acetylglucosaminidase,Chitin,Late,Hydrolyzes chitobiose to N-acetylglucosamine,Added
+K03794,Chitin deacetylase,Chitin,Mid-Late,Deacetylates chitin to chitosan,Added
+K16992,Cutinase,Cutin,Early,Hydrolyzes cutin in leaf and stem wax layers,New_Addition
+K10804,Cutinase family esterase,Cutin,Early,Alternative cutinase; waxy cuticle degradation,New_Addition
+K05909,Laccase,Lignin,Late,Oxidizes phenolic compounds in lignin,Original
+K00421,Laccase,Lignin,Late,Alternative laccase,Original
+K23515,Lignin peroxidase,Lignin,Late,Oxidizes non-phenolic lignin subunits,Original
+K15733,DyP-type peroxidase,Lignin,Late,Dye-decolorizing peroxidase; lignin degradation,Original
+K20205,Manganese peroxidase,Lignin,Late,Mn-dependent lignin oxidation,Original
+K23514,Peroxidase,Lignin,Late,General peroxidase for lignin degradation,Original
+K05871,Versatile peroxidase,Lignin,Late,Broad-substrate peroxidase; degrades phenolic and non-phenolic lignin,Added
+K00430,Class III peroxidase,Lignin,Late,Plant-type peroxidase in microbial lignin degradation,Added
+K11262,Glyoxal oxidase,Lignin,Late,Generates H2O2 for lignin-degrading peroxidases,Added
+K00035,GMC oxidoreductase,Lignin,Late,Glucose-methanol-choline oxidoreductase family; lignin degradation,Added
+K17067,Aryl-alcohol oxidase,Lignin,Late,Oxidizes aromatic alcohols from lignin breakdown,New_Addition
+K05892,Benzoquinone reductase,Lignin,Late,Reduces quinones from lignin degradation; detoxification,New_Addition
+K19355,Endo-1-4-beta-mannanase,Mannan,Mid,Hydrolyzes mannan backbone,Original
+K01192,Exo-beta-mannanase,Mannan,Mid-Late,Sequential removal of mannose from mannan,Original
+K01191,Beta-mannosidase,Mannan,Late,Terminal mannose removal from mannan oligosaccharides,New_Addition
+K01210,Lichenase (beta-1-3-1-4-glucanase),Mixed-linkage glucan,Early-Mid,GRASS-SPECIFIC; degrades mixed-linkage beta-glucans abundant in Avena,New_Addition
+K19669,Endo-beta-1-3-1-4-glucanase,Mixed-linkage glucan,Early-Mid,GRASS-SPECIFIC; mixed-linkage glucan degradation,New_Addition
+K01728,Pectate lyase,Pectin,Early,Cleaves pectin via beta-elimination; early litter degradation,Original
+K01051,Pectin methylesterase,Pectin,Early,Demethylates pectin; essential for pectin degradation,Original
+K01184,Polygalacturonase,Pectin,Early,Hydrolyzes galacturonic acid backbone,Original
+K01213,Galacturonan hydrolase,Pectin,Early,Endo-hydrolysis of pectin,Original
+K05989,Alpha-L-rhamnosidase,Pectin,Early,Removes rhamnose from pectin side chains,Original
+K01049,Pectin acetylesterase,Pectin,Early,Removes acetyl groups from pectin,Original
+K01730,Exo-polygalacturonase,Pectin,Early,Sequential removal of galacturonic acid from pectin,Added
+K18650,Rhamnogalacturonan lyase,Pectin,Early,Cleaves rhamnogalacturonan I backbone,Added
+K05970,Rhamnogalacturonan acetylesterase,Pectin,Early,Deacetylates rhamnogalacturonan,Added
+K07407,Alpha-galactosidase,Pectin,Early-Mid,Removes galactose from pectin and galactan side chains,New_Addition
+K18282,Pectate disaccharide-lyase,Pectin,Early,Degrades oligogalacturonides from pectin breakdown,New_Addition
+K12111,Beta-galactosidase,Pectin,Early-Mid,Removes galactose from pectin and xyloglucan,New_Addition
+K01176,Alpha-amylase,Starch,Early,Endo-hydrolysis of starch; rapid initial degradation,Added
+K01177,Beta-amylase,Starch,Early,Exo-hydrolysis of starch to maltose,Added
+K01178,Glucoamylase,Starch,Early,Releases glucose from starch and oligosaccharides,Added
+K01200,Pullulanase,Starch,Early,Debranching enzyme; hydrolyzes alpha-1-6 linkages in starch,New_Addition
+K01214,Isoamylase,Starch,Early,Debranching enzyme; critical for complete starch degradation,New_Addition
+K01181,Endo-1-4-beta-xylanase,Xylan,Mid,Endo-hydrolysis of xylan backbone; major hemicellulose in grasses,Original
+K01198,Beta-xylosidase,Xylan,Mid-Late,Releases xylose from xylooligosaccharides,Original
+K15920,Beta-xylosidase (isozyme),Xylan,Mid-Late,Alternative beta-xylosidase,Original
+K22268,Beta-xylosidase,Xylan,Mid-Late,Additional beta-xylosidase isoform,Original
+K05972,Acetylxylan esterase,Xylan,Mid,Removes acetyl groups from xylan,Original
+K15531,Oligosaccharide reducing-end xylanase,Xylan,Mid,Cleaves xylan oligosaccharides,Original
+K15924,Glucuronoarabinoxylan endo-1-4-beta-xylanase,Xylan,Mid,Degrades glucuronoarabinoxylan (grass hemicellulose),Original
+K20845,Endo-1-3-beta-xylanase,Xylan,Mid,Alternative xylan cleavage pathway,Original
+K01732,Alpha-glucuronidase,Xylan,Mid-Late,Removes glucuronic acid from xylan,Added
+K05973,Glucuronoyl esterase,Xylan,Mid-Late,Cleaves ester bonds between glucuronic acid and lignin,Added
+K14674,Feruloyl esterase,Xylan,Mid-Late,Cleaves lignin-carbohydrate ester linkages; critical for grass litter,Added
+K01532,Xyloglucan endo-transglycosylase/hydrolase,Xyloglucan,Mid,Modifies and hydrolyzes xyloglucan,Added
+K15922,Endo-beta-1-4-glucanase (xyloglucan-specific),Xyloglucan,Mid,Specific xyloglucan cleavage,Added
+K05351,Alpha-xylosidase,Xyloglucan,Mid,Removes xylose from xyloglucan side chains,Added
+K01226,Xyloglucanase,Xyloglucan,Mid,Endo-hydrolysis of xyloglucan backbone,New_Addition
+K01206,Alpha-L-fucosidase,Xyloglucan,Mid,Removes fucose from xyloglucan side chains,New_Addition
+},,,,,

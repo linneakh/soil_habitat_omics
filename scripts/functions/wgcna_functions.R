@@ -1,35 +1,11 @@
-#define colors
-colors <- c(
-  "black", "gray", "coral4", "coral",
-  "chartreuse3", "darkseagreen1", "blue", "lightblue",
-  "yellow4", "yellow", "darkorchid", "plum2",
-  "darkred", "darksalmon", "green4",
-  "greenyellow", "orange", "moccasin",
-  "hotpink4", "lightpink", "lightblue4", "lightcyan3",
-  "lightslateblue", "lightsteelblue1", "navy",
-  "darkgray", "brown", "cornflowerblue", "darkgoldenrod",
-  "brown3", "aliceblue", "aquamarine",
-  "beige", "bisque", "blue2", "blueviolet", "cyan", "darkblue",
-  "chocolate", "aquamarine3", "darkcyan", "deeppink", "black", "gray", "coral4", "coral",
-  "chartreuse3", "darkseagreen1", "blue", "lightblue",
-  "yellow4", "yellow", "darkorchid", "plum2",
-  "darkred", "darksalmon", "green4",
-  "greenyellow", "orange", "moccasin",
-  "hotpink4", "lightpink", "lightblue4", "lightcyan3",
-  "lightslateblue", "lightsteelblue1", "navy",
-  "darkgray", "brown", "cornflowerblue", "darkgoldenrod",
-  "brown3", "aliceblue", "aquamarine",
-  "beige", "bisque", "blue2", "blueviolet", "cyan", "darkblue",
-  "chocolate", "aquamarine3", "darkcyan", "deeppink"
-)
-
-
 # =============================================================================
 # WGCNA & CLUSTERPROFILE FUNCTIONS
+# Publication-ready version
 # =============================================================================
 
+
 # -----------------------------------------------------------------------------
-# 1. DATA PREPARATION & HELPER FUNCTIONS
+# 1. HELPER FUNCTIONS
 # -----------------------------------------------------------------------------
 
 safe_qvalues <- function(pvec) {
@@ -43,10 +19,12 @@ safe_qvalues <- function(pvec) {
 make_sample_annotation <- function(datTraits) {
   datTraits %>%
     rownames_to_column(var = "SampleID") %>%
-    separate_wider_delim(SampleID,
-                         delim = ".",
-                         names = c("ID", "Treatment", "Zone", "Timepoint"),
-                         cols_remove = FALSE) %>%
+    separate_wider_delim(
+      SampleID,
+      delim = ".",
+      names = c("ID", "Treatment", "Zone", "Timepoint"),
+      cols_remove = FALSE
+    ) %>%
     mutate(
       Zone = factor(Zone, levels = zone_levels),
       Timepoint = factor(Timepoint, levels = time_levels)
@@ -55,30 +33,18 @@ make_sample_annotation <- function(datTraits) {
     dplyr::select(Zone, Timepoint)
 }
 
-make_filtered_colors <- function(datExpr, geneInfo) {
-  filteredColors <- setNames(geneInfo$AssignedModule, geneInfo$Gene)
-  filteredColors <- filteredColors[colnames(datExpr)]
-  
-  keepGenes <- geneInfo$Gene[geneInfo$MM.assigned.sig.and.strong]
-  filteredColors[!(names(filteredColors) %in% keepGenes)] <- "grey"
-  
-  tabFilt <- table(filteredColors)
-  smallMods <- names(tabFilt)[tabFilt < minGenesFiltered & names(tabFilt) != "grey"]
-  filteredColors[filteredColors %in% smallMods] <- "grey"
-  
-  filteredColors
-}
-
 # -----------------------------------------------------------------------------
-# 2. NETWORK CONSTRUCTION — SOFT THRESHOLD & GENE TREE
+# 2. NETWORK CONSTRUCTION PLOTS
 # -----------------------------------------------------------------------------
 
-plot_soft_threshold <- function(datExpr, prefix = NULL, save_plot = TRUE, networkType = "signed") {
+plot_soft_threshold <- function(datExpr, prefix = NULL, save_plot = TRUE, 
+                                networkType = "signed") {
   powers <- c(1:10, seq(from = 12, to = 20, by = 2))
-  sft <- pickSoftThreshold(datExpr,
-                           powerVector = powers,
-                           verbose = 5,
-                           networkType = networkType
+  sft <- pickSoftThreshold(
+    datExpr,
+    powerVector = powers,
+    verbose = 5,
+    networkType = networkType
   )
   
   if (save_plot && !is.null(prefix)) {
@@ -172,113 +138,46 @@ plot_me_clustering <- function(MEs, cutHeight, prefix) {
   invisible(METree)
 }
 
-# -----------------------------------------------------------------------------
-# 3. GENE & MODULE MEMBERSHIP
-# -----------------------------------------------------------------------------
-
-gene_info <- function(traits, variable, MEs, data, mergedColor = mergedColors, Dir = Dir.o) {
-  var.df = as.data.frame(get(variable, traits))
-  rownames(var.df) <- rownames(traits) 
-  names(var.df) = variable
+plot_sample_tree <- function(datExpr, datTraits, prefix) {
+  sampleTree <- flashClust(dist(datExpr), method = "average")
+  traitColors <- numbers2colors(datTraits, signed = TRUE, naColor = "grey")
   
-  modNames = substring(names(MEs), 3)
-  geneModuleMembership = cor(data, MEs, use = "p") 
-  nGenes = ncol(data);
-  nSamples = nrow(data);
-  MMPvalue = as.data.frame(corPvalueStudent(as.matrix(geneModuleMembership), nSamples))
+  filename <- paste0(Dir.f, prefix, "_sample_dendrogram_trait_heatmap.png")
+  png(filename, width = 10, height = 7, units = "in", res = 300)
+  plotDendroAndColors(
+    sampleTree, 
+    traitColors,
+    groupLabels = names(datTraits),
+    main = "Sample dendrogram and trait heatmap"
+  )
+  dev.off()
   
-  names(geneModuleMembership) = paste("MM", modNames, sep="");
-  names(MMPvalue) = paste("p.MM", modNames, sep="");
-  table(rownames(data) == rownames(var.df))
-  geneTraitSignificance = cor(data, var.df, use = "p");
-  GSPvalue = as.data.frame(corPvalueStudent(geneTraitSignificance, nSamples));
-  GSPvalue.0 = as.vector(GSPvalue[,variable])
-  GSQvalue.0 = qvalue(p=GSPvalue.0, lambda = 0, fdr.level = 0.05)
-  GSQvalue <- as.data.frame(GSQvalue.0$qvalues, row.names=names(data))
-  summary(GSQvalue.0)
-  pi0 <- GSQvalue.0$pi0
-  lfdr <- GSQvalue.0$lfdr 
-  
-  probes=names(data)
-  geneInfo0 = data.frame(datExpr = probes, ModuleColor = mergedColors,
-                         geneTraitSignificance,                      
-                         GSQvalue)
-  
-  filename = paste(Dir, variable, "_not_ordered.csv", sep = "")
-  write.csv(geneInfo0, filename)
-  
-  var.vec = get(variable, traits)
-  NS1=networkScreening(y=var.vec, datME=MEs, datExpr=data,
-                       oddPower=3, blockSize=1000, minimumSampleSize=4,
-                       addMEy=TRUE, removeDiag=FALSE, weightESy=0.5, corOptions = "use = 'p', method = 'spearman'")
-  filename2 = paste(Dir, variable, "_gene_screening.csv", sep = "")
-  write.csv(NS1, filename2)
+  invisible(sampleTree)
 }
 
-gene_info_no_trait <- function(MEs, data, Dir=Dir.o) {
-  modNames = substring(names(MEs), 3)
-  geneModuleMembership = cor(data, MEs, use = "p")
-  
-  nGenes = ncol(data);
-  nSamples = nrow(data);
-  MMPvalue = as.data.frame(corPvalueStudent(as.matrix(geneModuleMembership), nSamples))
-  
-  names(geneModuleMembership) = paste("MM", modNames, sep="");
-  names(MMPvalue) = paste("p.MM", modNames, sep="");
-  
-  probes=names(data)
-  geneInfo0 = data.frame(datExpr = probes, ModuleColor = mergedColors)
-  
-  filename = paste(Dir.o, "_not_ordered.csv", sep = "")
-  write.csv(geneInfo0, filename)
-  return(geneInfo0)
-}
+# -----------------------------------------------------------------------------
+# 3. MODULE MEMBERSHIP & KEY FILES
+# -----------------------------------------------------------------------------
 
-gene_info_w_KO_flux <- function(traits, variable, MEs, data, module_colors, Dir = Dir.o, Kegg = kegg) {
-  var.df = as.data.frame(traits[,variable]) 
-  rownames(var.df) <- rownames(traits) 
-  names(var.df) = variable
+write_module_key <- function(datExpr, colors, prefix) {
+  df_key <- data.frame(
+    KO = colnames(datExpr),
+    moduleColors = colors,
+    stringsAsFactors = FALSE
+  )
+  write.csv(df_key, paste0(Dir.o, prefix, "_Module_key.csv"), row.names = FALSE)
   
-  modNames = substring(names(MEs), 3)
+  kegg.brite <- read.csv("./data/Kegg_brite_all.csv")
+  if ("X" %in% colnames(kegg.brite)) kegg.brite$X <- NULL
   
-  geneModuleMembership = cor(data, MEs, use = "p")
-  MMPvalue = as.data.frame(corPvalueStudent(as.matrix(geneModuleMembership), nSamples))
-  names(geneModuleMembership) = paste("MM", modNames, sep="");
-  names(MMPvalue) = paste("p.MM", modNames, sep="");
-  MMPvector = as.vector(MMPvalue)
-  MMQvalue.0 = qvalue(p=MMPvector, lambda = 0, fdr.level = 0.05)
-  MMQvalue <- as.data.frame(MMQvalue.0$qvalues, row.names=names(data))
-  names(MMQvalue) = paste("q.MM", modNames, sep="");
+  df_key_pathways <- merge(df_key, kegg.brite, by = "KO", all.x = TRUE)
+  readr::write_delim(
+    df_key_pathways,
+    paste0(Dir.o, prefix, "_df_key_pathways.txt"),
+    delim = "\t"
+  )
   
-  geneTraitSignificance = cor(data, var.df, use = "p");
-  GSPvalue = as.data.frame(corPvalueStudent(geneTraitSignificance, nSamples));
-  GSPvalue.0 = as.vector(GSPvalue[,variable])
-  GSQvalue.0 = qvalue(p=GSPvalue.0, lambda = 0, fdr.level = 0.05)
-  GSQvalue <- as.data.frame(GSQvalue.0$qvalues, row.names=names(data))
-  summary(GSQvalue.0)
-  pi0 <- GSQvalue.0$pi0
-  lfdr <- GSQvalue.0$lfdr   
-  
-  probes=names(data)
-  geneInfo0 = data.frame(Gene = probes, ModuleColor = module_colors,
-                         GS = geneTraitSignificance, GS.Q = GSQvalue)
-  
-  modOrder = order(abs(cor(MEs, var.df, use = "p")));
-  
-  for (mod in 1:ncol(geneModuleMembership)) {
-    oldNames = names(geneInfo0)
-    geneInfo0 = data.frame(geneInfo0, geneModuleMembership[, modOrder[mod]],
-                           MMPvalue[, modOrder[mod]], MMQvalue[, modOrder[mod]]);
-    names(geneInfo0) = c(oldNames, paste("MM.", modNames[modOrder[mod]], sep=""),
-                         paste("p.MM.", modNames[modOrder[mod]], sep=""),                        
-                         paste("q.MM.", modNames[modOrder[mod]], sep=""))
-  }
-  
-  geneInfoK <- geneInfo0 %>%
-    merge(Kegg, by = "Gene", all.x=TRUE, all.y=FALSE) 
-  
-  filename = paste(Dir, variable, "_ordered.csv", sep = "")
-  write.csv(geneInfoK, filename)
+  list(df_key = df_key, df_key_pathways = df_key_pathways)
 }
 
 compute_gene_membership_table <- function(datExpr, datTraits, colors, MEs, prefix) {
@@ -348,83 +247,34 @@ compute_gene_membership_table <- function(datExpr, datTraits, colors, MEs, prefi
   geneInfo$p.MM.assigned[grey_idx] <- NA
   geneInfo$q.MM.assigned[grey_idx] <- NA
   
-  geneInfo$MM.assigned.significant <-
-    geneInfo$q.MM.assigned < moduleSigAlpha
+  geneInfo$MM.assigned.significant <- geneInfo$q.MM.assigned < moduleSigAlpha
   
   geneInfo$MM.assigned.sig.and.strong <-
     geneInfo$q.MM.assigned < moduleSigAlpha &
     abs(geneInfo$MM.assigned) >= kME_threshold
   
-  write.csv(geneInfo,
-            file = paste0(Dir.o, prefix, "_geneInfo_with_MM_pq_assigned.csv"), row.names = FALSE)
-  write.csv(subset(geneInfo, MM.assigned.significant),
-            file = paste0(Dir.o, prefix, "_geneInfo_significant_within_assigned_module.csv"), row.names = FALSE)
-  write.csv(subset(geneInfo, MM.assigned.sig.and.strong),
-            file = paste0(Dir.o, prefix, "_geneInfo_significant_and_strong_within_assigned_module.csv"), row.names = FALSE)
+  write.csv(
+    geneInfo,
+    file = paste0(Dir.o, prefix, "_geneInfo_with_MM_pq_assigned.csv"),
+    row.names = FALSE
+  )
+  write.csv(
+    subset(geneInfo, MM.assigned.significant),
+    file = paste0(Dir.o, prefix, "_geneInfo_significant_within_assigned_module.csv"),
+    row.names = FALSE
+  )
+  write.csv(
+    subset(geneInfo, MM.assigned.sig.and.strong),
+    file = paste0(Dir.o, prefix, "_geneInfo_significant_and_strong_within_assigned_module.csv"),
+    row.names = FALSE
+  )
   
   geneInfo
-}
-
-write_module_key <- function(datExpr, colors, prefix) {
-  df_key <- data.frame(
-    KO = colnames(datExpr),
-    moduleColors = colors,
-    stringsAsFactors = FALSE
-  )
-  write.csv(df_key, paste0(Dir.o, prefix, "_Module_key.csv"), row.names = FALSE)
-  
-  kegg.brite <- read.csv("./output/KEGG/Kegg_brite_all.csv")
-  if ("X" %in% colnames(kegg.brite)) kegg.brite$X <- NULL
-  
-  df_key_pathways <- merge(df_key, kegg.brite, by = "KO", all.x = TRUE)
-  readr::write_delim(df_key_pathways,
-                     paste0(Dir.o, prefix, "_df_key_pathways.txt"),
-                     delim = "\t")
-  
-  list(df_key = df_key, df_key_pathways = df_key_pathways)
-}
-
-write_module_key_family <- function(datExpr, colors, prefix) {
-  df_key <- data.frame(
-    KO = colnames(datExpr),
-    moduleColors = colors,
-    stringsAsFactors = FALSE
-  )
-  
-  df_key <- df_key %>%
-    separate(KO, c("KO", "Family"), sep = "\\.", remove = FALSE) 
-  write.csv(df_key, paste0(Dir.o, prefix, "_Module_key.csv"), row.names = FALSE)
-  
-  kegg.brite <- read.csv("./output/KEGG/Kegg_brite_all.csv")
-  if ("X" %in% colnames(kegg.brite)) kegg.brite$X <- NULL
-  
-  df_key_pathways <- merge(df_key, kegg.brite, by = "KO", all.x = TRUE)
-  readr::write_delim(df_key_pathways,
-                     paste0(Dir.o, prefix, "_df_key_pathways.txt"),
-                     delim = "\t")
-  
-  list(df_key = df_key, df_key_pathways = df_key_pathways)
 }
 
 # -----------------------------------------------------------------------------
 # 4. MODULE-TRAIT RELATIONSHIPS
 # -----------------------------------------------------------------------------
-
-plot_sample_tree <- function(datExpr, datTraits, prefix) {
-  sampleTree <- flashClust(dist(datExpr), method = "average")
-  traitColors <- numbers2colors(datTraits, signed = TRUE, naColor = "grey")
-  
-  filename <- paste0(Dir.f, prefix, "_sample_dendrogram_trait_heatmap.png")
-  png(filename, width = 10, height = 7, units = "in", res = 300)
-  plotDendroAndColors(
-    sampleTree, traitColors,
-    groupLabels = names(datTraits),
-    main = "Sample dendrogram and trait heatmap"
-  )
-  dev.off()
-  
-  invisible(sampleTree)
-}
 
 compute_module_trait_heatmap <- function(MEs, datTraits, prefix,
                                          trait_order = c("Bulk", "Rhizo", "RhizoDet", "Detritus"),
@@ -432,7 +282,7 @@ compute_module_trait_heatmap <- function(MEs, datTraits, prefix,
   nSamples <- nrow(datTraits)
   
   datTraits.sub <- datTraits[, trait_order, drop = FALSE]
-  MEs.sub <- MEs[, module_order, drop = FALSE] 
+  MEs.sub <- MEs[, module_order, drop = FALSE]
   datTraits.sub <- datTraits.sub[match(rownames(MEs.sub), rownames(datTraits.sub)), , drop = FALSE]
   
   moduleTraitCor <- t(cor(MEs.sub, datTraits.sub, use = "p"))
@@ -523,214 +373,525 @@ plot_module_trait_heatmap_subset <- function(full_results,
   invisible(list(cor = moduleTraitCor, q = moduleTraitQvalue))
 }
 
-plot_module_trait_with_gene_bars <- function(full_results,
-                                             df_key,
-                                             trait_subset = NULL,
-                                             module_subset = NULL,
-                                             prefix = "combined") {
+plot_module_trait_with_gene_bars <- function(
+    full_results,
+    df_key,
+    trait_subset = NULL,
+    module_subset = NULL,
+    prefix = "combined",
+    exudate_levels = NULL,
+    litter_levels = NULL
+) {
   library(patchwork)
-  library(ggplot2)
-  library(dplyr)
+ 
   
-  # -------------------------
-  # 1. Subset correlation results (same as subset function)
-  # -------------------------
   moduleTraitCor    <- full_results$cor
   moduleTraitQvalue <- full_results$q
   
-  # Strip ME prefix from column names
-  # Strip ME prefix from column names
-  colnames(moduleTraitCor)    <- str_remove(colnames(moduleTraitCor), "^ME")
-  colnames(moduleTraitQvalue) <- str_remove(colnames(moduleTraitQvalue), "^ME")
+  colnames(moduleTraitCor) <-
+    str_remove(colnames(moduleTraitCor), "^ME")
   
-  # Also strip ME from module_subset if present, and save as the ordering reference
+  colnames(moduleTraitQvalue) <-
+    str_remove(colnames(moduleTraitQvalue), "^ME")
+  
   if (!is.null(module_subset)) {
-    moduleTraitCor    <- moduleTraitCor[, module_subset, drop = FALSE]
+    moduleTraitCor <- moduleTraitCor[, module_subset, drop = FALSE]
     moduleTraitQvalue <- moduleTraitQvalue[, module_subset, drop = FALSE]
   }
   
   if (!is.null(trait_subset)) {
-    moduleTraitCor    <- moduleTraitCor[trait_subset, ,drop = FALSE]
-    moduleTraitQvalue <- moduleTraitQvalue[trait_subset, ,drop = FALSE]
+    moduleTraitCor <- moduleTraitCor[trait_subset, , drop = FALSE]
+    moduleTraitQvalue <- moduleTraitQvalue[trait_subset, , drop = FALSE]
   }
   
-  # Clean ordered vector to use as factor levels everywhere
-  module_order <- str_remove(colnames(moduleTraitCor), "^ME")
-  
-  # Use module_order to set x-axis order, fall back to column order
   if (is.null(module_subset)) {
     module_subset <- colnames(moduleTraitCor)
   }
   
-  # -------------------------
-  # 2. Heatmap as ggplot 
-  # (converts labeledHeatmap logic to ggplot so patchwork can align it)
-  # -------------------------
   cor_df <- as.data.frame(moduleTraitCor) %>%
     rownames_to_column(var = "Trait") %>%
-    pivot_longer(-Trait, names_to = "Module", values_to = "Correlation")
+    pivot_longer(
+      -Trait,
+      names_to = "Module",
+      values_to = "Correlation"
+    )
   
   q_df <- as.data.frame(moduleTraitQvalue) %>%
     rownames_to_column(var = "Trait") %>%
-    pivot_longer(-Trait, names_to = "Module", values_to = "Qvalue")
+    pivot_longer(
+      -Trait,
+      names_to = "Module",
+      values_to = "Qvalue"
+    )
   
-  heatmap_df <- left_join(cor_df, q_df, by = c("Trait", "Module")) %>%
+  heatmap_df <- left_join(
+    cor_df,
+    q_df,
+    by = c("Trait", "Module")
+  ) %>%
     mutate(
       Module = factor(Module, levels = module_subset),
       Trait = factor(Trait, levels = trait_subset),
-      label  = paste0(signif(Correlation, 2), "\n(", signif(Qvalue, 1), ")")
+      label = paste0(
+        signif(Correlation, 2),
+        "\n(",
+        signif(Qvalue, 1),
+        ")"
+      )
     ) %>%
-    mutate(Module = str_remove(Module, "ME"))
+    mutate(
+      Module = str_remove(Module, "ME")
+    )
   
-  p_heat <- ggplot(heatmap_df, aes(x = Module, y = Trait, fill = Correlation)) +
+  p_heat <- ggplot(
+    heatmap_df,
+    aes(
+      x = Module,
+      y = Trait,
+      fill = Correlation
+    )
+  ) +
     geom_tile(color = "white") +
     geom_text(aes(label = label), size = 2.5) +
-    scale_fill_gradient2(low = "blue", mid = "white", high = "red",
-                         midpoint = 0, limits = c(-1, 1),
-                         name = "Correlation") +
-    scale_x_discrete(limits = module_subset) +  # force order here
+    scale_fill_gradient2(
+      low = "blue",
+      mid = "white",
+      high = "red",
+      midpoint = 0,
+      limits = c(-1, 1),
+      name = "Correlation"
+    ) +
+    scale_x_discrete(limits = module_subset) +
     theme_bw() +
     theme(
-      axis.text.x  = element_blank(),
+      axis.text.x = element_blank(),
       axis.ticks.x = element_blank(),
       axis.title.x = element_blank(),
-      axis.text.y  = element_text(size = 12),
-      panel.grid   = element_blank(),
+      axis.text.y = element_text(size = 12),
+      panel.grid = element_blank(),
       strip.background = element_rect(fill = "grey90")
     ) +
     labs(y = "Trait")
-  # -------------------------
-  # 3. Load exudate & litter gene lists
-  # -------------------------
-  exudate.list <- read.csv("./data/root_exudate_KOs_5_21_26_Claude_v2.csv", header = TRUE) %>%
-    # filter(
-    #   Role != "Amino acid catabolism",
-    #   Role != "Amino acid metabolism",
-    #   Role != "Amino acid uptake",
-    #   Role != "Compatible solutes",
-    #   Role != "Glyoxylate cycle",
-    #   Role != "Ring cleavage",
-    #   Role != "Small organics",
-    #   Role != "Organic acid catabolism",
-    #   Role != "Organic acid uptake"
-    # )
-       filter(
-         Root_Exudate_Class != "Xylose",
-         Root_Exudate_Class != "Alcohols",
-         Root_Exudate_Class != "Trehalose",
-         Root_Exudate_Class != "Amino acids",
-         Root_Exudate_Class != "Galactose",
-         Root_Exudate_Class != "Arabinose",
-         Root_Exudate_Class != "Gluconate",
-         Root_Exudate_Class != "GABA",
-         Root_Exudate_Class != "Aromatic",
-         Root_Exudate_Class != "Flavonoids",
-         Role != "Acetate catabolism"
-       )
   
-  litter.list <- read.csv("./data/litter_degradation_KOs_5_21_26_Claude.csv", header = TRUE) %>%
+  exudate.list <- read.csv(
+    "./data/root_exudate_KOs.csv",
+    header = TRUE
+  )
+  
+  litter.list <- read.csv(
+    "./data/litter_KOs.csv",
+    header = TRUE
+  ) %>%
     filter(
       Litter_Component != "Chitin",
       Litter_Component != "Arabinogalactan"
     )
   
-  # -------------------------
-  # 4. Merge with module assignments
-  # -------------------------
+  exudate.modules <- merge(
+    df_key,
+    exudate.list,
+    by = "KO"
+  ) %>%
+    filter(
+      !is.na(moduleColors),
+      moduleColors %in% module_subset
+    ) %>%
+    mutate(
+      moduleColors = factor(
+        moduleColors,
+        levels = module_subset
+      )
+    )
   
-  exudate.modules <- merge(df_key, exudate.list, by = "KO") %>%
-    mutate(moduleColors = factor(moduleColors, levels = module_subset))
+  litter.modules <- merge(
+    df_key,
+    litter.list,
+    by = "KO"
+  ) %>%
+    filter(
+      !is.na(moduleColors),
+      moduleColors %in% module_subset
+      ) %>%
+    mutate(
+      moduleColors = factor(
+        moduleColors,
+        levels = module_subset
+      )
+    )
   
-  litter.modules <- merge(df_key, litter.list, by = "KO") %>%
-    mutate(moduleColors = factor(moduleColors, levels = module_subset))
+  # If no common levels are supplied, use the levels present
+  # in the current dataset.
+  if (is.null(exudate_levels)) {
+    exudate_levels <- sort(
+      unique(exudate.modules$Root_Exudate_Class)
+    )
+  }
   
-  # -------------------------
-  # 5. Count genes per module, with ALL modules present even if zero
-  # This is the key step - expand to full module list first
-  # -------------------------
-  all_modules <- data.frame(moduleColors = factor(module_subset, levels = module_subset))
+  if (is.null(litter_levels)) {
+    litter_levels <- sort(
+      unique(litter.modules$Litter_Component)
+    )
+  }
   
   exudate_counts <- exudate.modules %>%
-    group_by(moduleColors, Role) %>%
-    summarise(n = n(), .groups = "drop") %>%
-    complete(moduleColors = factor(module_subset, levels = module_subset),
-             Role,
-             fill = list(n = 0)) %>%
-    drop_na() %>%
-    filter(n >0) %>%
-    mutate(moduleColors = factor(moduleColors, levels = module_subset))  # re-level after complete
+    mutate(
+      Root_Exudate_Class = factor(
+        Root_Exudate_Class,
+        levels = exudate_levels
+      )
+    ) %>%
+    group_by(
+      moduleColors,
+      Root_Exudate_Class,
+      .drop = FALSE
+    ) %>%
+    summarise(
+      n = n(),
+      .groups = "drop"
+    ) %>%
+    complete(
+      moduleColors = factor(
+        module_subset,
+        levels = module_subset
+      ),
+      Root_Exudate_Class = factor(
+        exudate_levels,
+        levels = exudate_levels
+      ),
+      fill = list(n = 0)
+    ) %>%
+    mutate(
+      moduleColors = factor(
+        moduleColors,
+        levels = module_subset
+      ),
+      Root_Exudate_Class = factor(
+        Root_Exudate_Class,
+        levels = exudate_levels
+      )
+    )
   
   litter_counts <- litter.modules %>%
-    group_by(moduleColors, Litter_Component) %>%
-    summarise(n = n(), .groups = "drop") %>%
-    complete(moduleColors = factor(module_subset, levels = module_subset), 
-             Litter_Component, 
-             fill = list(n = 0))%>%
-    drop_na() %>%
-    filter(n >0) %>%
-    mutate(moduleColors = factor(moduleColors, levels = module_subset))  # re-level after complete
+    mutate(
+      Litter_Component = factor(
+        Litter_Component,
+        levels = litter_levels
+      )
+    ) %>%
+    group_by(
+      moduleColors,
+      Litter_Component,
+      .drop = FALSE
+    ) %>%
+    summarise(
+      n = n(),
+      .groups = "drop"
+    ) %>%
+    complete(
+      moduleColors = factor(
+        module_subset,
+        levels = module_subset
+      ),
+      Litter_Component = factor(
+        litter_levels,
+        levels = litter_levels
+      ),
+      fill = list(n = 0)
+    ) %>%
+    mutate(
+      moduleColors = factor(
+        moduleColors,
+        levels = module_subset
+      ),
+      Litter_Component = factor(
+        Litter_Component,
+        levels = litter_levels
+      )
+    )
   
-  # -------------------------
-  # 6. Color palettes
-  # -------------------------
-  gray_palette_e <- gray.colors(length(unique(exudate_counts$Role)), start = 0.8, end = 0.25)
-  gray_palette_l <- gray.colors(length(unique(litter_counts$Litter_Component)), start = 0.8, end = 0.25)
+  gray_palette_e <- setNames(
+    gray.colors(
+      length(exudate_levels),
+      start = 0.95,
+      end = 0.07
+    ),
+    exudate_levels
+  )
   
-  # -------------------------
-  # 7. Exudate bar plot — x axis hidden, aligned to heatmap
-  # -------------------------
-  p_exudate <- ggplot(exudate_counts, aes(x = moduleColors, y = n, fill = Role)) +
+  gray_palette_l <- setNames(
+    gray.colors(
+      length(litter_levels),
+      start = 0.95,
+      end = 0.07
+    ),
+    litter_levels
+  )
+  
+  p_exudate <- ggplot(
+    exudate_counts,
+    aes(
+      x = moduleColors,
+      y = n,
+      fill = Root_Exudate_Class
+    )
+  ) +
     geom_bar(stat = "identity") +
-    scale_fill_manual(values = gray_palette_e) +
+    scale_fill_manual(
+      values = gray_palette_e,
+      limits = exudate_levels,
+      drop = FALSE
+    ) +
     scale_x_discrete(drop = FALSE) +
     theme_bw() +
     theme(
-      axis.text.x  = element_blank(),
+      axis.text.x = element_blank(),
       axis.ticks.x = element_blank(),
       axis.title.x = element_blank(),
-      panel.grid   = element_blank(),
+      panel.grid = element_blank(),
       legend.key.width = unit(0.5, "cm"),
       legend.text = element_text(size = 12)
     ) +
-    labs(y = "Exudate\ngenes", fill = "Role")
+    labs(
+      y = "Exudate\ngenes",
+      fill = "Role"
+    )
   
-  # -------------------------
-  # 8. Litter bar plot — x axis shown for module labels
-  # -------------------------
-  p_litter <- ggplot(litter_counts, aes(x = moduleColors, y = n, fill = Litter_Component)) +
+  p_litter <- ggplot(
+    litter_counts,
+    aes(
+      x = moduleColors,
+      y = n,
+      fill = Litter_Component
+    )
+  ) +
     geom_bar(stat = "identity") +
-    scale_fill_manual(values = gray_palette_l) +
+    scale_fill_manual(
+      values = gray_palette_l,
+      limits = litter_levels,
+      drop = FALSE
+    ) +
     scale_x_discrete(drop = FALSE) +
     theme_bw() +
     theme(
-      axis.text.x  = element_text(angle = 45, hjust = 1, size = 12),
-      panel.grid   = element_blank(),
+      axis.text.x = element_text(
+        angle = 45,
+        hjust = 1,
+        size = 12
+      ),
+      panel.grid = element_blank(),
       legend.key.width = unit(0.5, "cm"),
       legend.text = element_text(size = 12)
     ) +
-    labs(x = "Module", y = "Litter\ngenes", fill = "Litter substrate")
+    labs(
+      x = "Module",
+      y = "Litter\ngenes",
+      fill = "Litter substrate"
+    )
   
-  # -------------------------
-  # 9. Stitch together with patchwork
-  # -------------------------
   combined <- p_heat / p_exudate / p_litter +
-    plot_layout(heights = c(3, 2, 2)) # heatmap taller than bars
+    plot_layout(heights = c(3, 2, 2))
   
-  # -------------------------
-  # 10. Save
-  # -------------------------
-  filename <- paste0(Dir.f, prefix, "_heatmap_with_gene_bars.pdf")
-  ggsave(filename, combined,
-         width = max(8, length(module_subset) * 0.6),
-         height = 10,
-         units = "in",
-         dpi = 300)
+  filename <- paste0(
+    Dir.f,
+    prefix,
+    "_heatmap_with_gene_bars.pdf"
+  )
+  
+  ggsave(
+    filename,
+    combined,
+    width = max(8, length(module_subset) * 0.6),
+    height = 10,
+    units = "in",
+    dpi = 300
+  )
   
   invisible(combined)
 }
 
 # -----------------------------------------------------------------------------
-# 5. STATISTICAL TESTING — EIGENGENE ~ ZONE/TIMEPOINT
+# 5. EIGENGENE VISUALIZATION
+# -----------------------------------------------------------------------------
+
+plot_me_sample_heatmap <- function(MEs, datTraits, prefix) {
+  col_ann <- make_sample_annotation(datTraits)
+  
+  MEs_use <- as.data.frame(MEs)
+  if ("MEgrey" %in% colnames(MEs_use)) {
+    MEs_use <- dplyr::select(MEs_use, -MEgrey)
+  }
+  
+  MEs_use <- MEs_use[order(match(rownames(MEs_use), rownames(col_ann))), , drop = FALSE]
+  col_ann <- col_ann[match(rownames(MEs_use), rownames(col_ann)), , drop = FALSE]
+  
+  filename <- paste0(Dir.f, prefix, "_eigengene_heatmap.pdf")
+  pdf(file = filename, height = 8, width = 6)
+  pheatmap(
+    MEs_use,
+    cluster_col = TRUE,
+    cluster_row = TRUE,
+    show_rownames = FALSE,
+    show_colnames = TRUE,
+    fontsize = 6,
+    annotation_row = col_ann,
+    annotation_colors = ann_color
+  )
+  dev.off()
+}
+
+plot_modules_by_time <- function(module_eigengenes, metadata, module_color, ncol = 2) {
+  metadata <- metadata %>%
+    rownames_to_column(var = "SampleID") %>%
+    separate_wider_delim(
+      SampleID,
+      delim = ".",
+      names = c("ID", "Treatment", "Zone", "Timepoint"),
+      cols_remove = FALSE
+    )
+  
+  ME = module_eigengenes[, paste("ME", module_color, sep = "")]
+  ME <- as.data.frame(ME)
+  ME$SampleID <- rownames(module_eigengenes)
+  ME <- ME %>%
+    merge(metadata, by = "SampleID") %>%
+    mutate(Zone = factor(Zone, levels = c("Bulk", "Rhizo", "RhizoDetritus", "Detritus")))
+  
+  ME$Timepoint <- factor(ME$Timepoint, levels = c("4weeks", "8weeks", "12weeks"))
+  
+  barplot_time <- ggplot(ME, aes(x = Zone, y = ME)) +
+    geom_point() + 
+    geom_boxplot(fill = module_color) +
+    facet_wrap(~Timepoint, ncol = ncol) +
+    labs(
+      title = paste(module_color, "module", sep = "_"),
+      y = "Eigengene Expression",
+      x = "Treatment"
+    ) +
+    theme_bw() +
+    theme(
+      text = element_text(size = size, color = "black"),
+      axis.title.x = element_text(face = "bold"),
+      axis.title.y = element_text(face = "bold"),
+      axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, color = "black"),
+      axis.text.y = element_text(color = "black")
+    )
+  print(barplot_time)
+}
+
+plot_eigengenes_by_module <- function(MEs, datTraits, prefix, ncol = 4) {
+  modules <- substring(colnames(MEs), 3)
+  
+  for (m in modules) {
+    try({
+      plot_modules_by_time(MEs, datTraits, m, ncol = ncol)
+      ggsave(
+        filename = paste0(Dir.f, prefix, "_", m, "_EGexp_zone_time.png"),
+        width = 5, height = 3, units = "in", dpi = 300
+      )
+    }, silent = TRUE)
+  }
+}
+
+plot_eigengenes_gg <- function(MEs, datTraits,
+                               facet_by = c("Timepoint"),
+                               color_by = "Zone",
+                               shape_by = NULL,
+                               prefix = "plot",
+                               save = TRUE,
+                               order_MEs = order_MEs_colors,
+                               ncol = 1,
+                               w = w,
+                               h = h) {
+  library(dplyr)
+  library(tidyr)
+  library(ggplot2)
+  
+  trait_df <- datTraits %>%
+    rownames_to_column(var = "SampleID") %>%
+    separate_wider_delim(
+      SampleID,
+      delim = ".",
+      names = c("ID", "Treatment", "Zone", "Timepoint"),
+      cols_remove = FALSE
+    ) %>%
+    mutate(
+      Zone = factor(Zone),
+      Timepoint = factor(Timepoint, levels = c("4weeks", "8weeks", "12weeks")),
+      Treatment = factor(Treatment)
+    )
+  
+  me_long <- as.data.frame(MEs) %>%
+    rownames_to_column(var = "SampleID") %>%
+    pivot_longer(cols = starts_with("ME"),
+                 names_to = "Module",
+                 values_to = "Eigengene") %>%
+    filter(Module != "MEgrey") %>%
+    mutate(Module = substring(Module, 3)) %>%
+    mutate(Module = factor(Module, levels = c(order_MEs)))
+  
+  df <- me_long %>%
+    left_join(trait_df, by = "SampleID") %>%
+    mutate(Zone = factor(Zone, c("Bulk", "Rhizo", "RhizoDetritus", "Detritus")))
+  
+  p <- ggplot(df, aes(x = Module, y = Eigengene, color = Module)) +
+    geom_boxplot(outlier.shape = NA, alpha = 0.6) +
+    geom_jitter(
+      width = 0.2, size = 1.5, alpha = 0.7,
+      aes(shape = if (!is.null(shape_by)) .data[[shape_by]] else NULL)
+    ) +
+    scale_color_identity(guide = "legend") +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "grey50")
+  
+  p2 <- ggplot(df, aes(x = Zone, y = Eigengene, color = Module)) +
+    geom_boxplot(outlier.shape = NA, alpha = 0.6) +
+    geom_jitter(
+      width = 0.2, size = 1.5, alpha = 0.7,
+      aes(shape = if (!is.null(shape_by)) .data[[shape_by]] else NULL)
+    ) +
+    scale_color_identity(guide = "legend") +
+    geom_hline(yintercept = 0, linetype = "dashed", color = "grey50")
+  
+  if (length(facet_by) == 1 && facet_by == "Module") {
+    p <- p2 + 
+      facet_wrap(as.formula(paste("~", facet_by)), ncol = ncol) +
+      labs(x = "Zone", y = "Eigengene expression", color = color_by)
+  } else if (length(facet_by) == 1) {
+    p <- p + 
+      facet_wrap(as.formula(paste("~", facet_by)), ncol = ncol) +
+      labs(x = "Module", y = "Eigengene expression", color = color_by)
+  } else if (length(facet_by) == 2) {
+    p <- p + 
+      facet_wrap(as.formula(paste(facet_by[1], "~", facet_by[2])), ncol = ncol) +
+      labs(x = "Module", y = "Eigengene expression", color = color_by)
+  } else {
+    warning("facet_by must be 'Module', a single variable, or two variables")
+  }
+  
+  p <- p +
+    ylim(c(-0.4, 0.4)) +
+    theme_bw() +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      panel.grid   = element_blank(),
+      strip.background = element_rect(fill = "grey90")
+    )
+  
+  if (save) {
+    ggsave(
+      filename = paste0(Dir.f, prefix, "_eigengene_plot.pdf"),
+      plot = p,
+      width = w,
+      height = h,
+      units = "in",
+      dpi = 300
+    )
+  }
+  
+  return(p)
+}
+
+# -----------------------------------------------------------------------------
+# 6. STATISTICAL TESTING
 # -----------------------------------------------------------------------------
 
 run_eigengene_zone_stats <- function(MEs, datTraits, prefix) {
@@ -740,10 +901,12 @@ run_eigengene_zone_stats <- function(MEs, datTraits, prefix) {
   
   trait_df <- datTraits %>%
     rownames_to_column(var = "SampleID") %>%
-    separate_wider_delim(SampleID,
-                         delim = ".",
-                         names = c("ID", "Treatment", "Zone", "Timepoint"),
-                         cols_remove = FALSE) %>%
+    separate_wider_delim(
+      SampleID,
+      delim = ".",
+      names = c("ID", "Treatment", "Zone", "Timepoint"),
+      cols_remove = FALSE
+    ) %>%
     mutate(
       Zone = factor(Zone),
       Timepoint = factor(Timepoint, levels = c("4weeks", "8weeks", "12weeks"))
@@ -751,9 +914,11 @@ run_eigengene_zone_stats <- function(MEs, datTraits, prefix) {
   
   me_long <- MEs %>%
     rownames_to_column(var = "SampleID") %>%
-    pivot_longer(cols = starts_with("ME"),
-                 names_to = "Module",
-                 values_to = "Eigengene")
+    pivot_longer(
+      cols = starts_with("ME"),
+      names_to = "Module",
+      values_to = "Eigengene"
+    )
   
   stat_df <- me_long %>%
     left_join(trait_df, by = "SampleID")
@@ -802,10 +967,12 @@ run_eigengene_zone_time_stats <- function(MEs, datTraits, prefix) {
   
   trait_df <- datTraits %>%
     rownames_to_column(var = "SampleID") %>%
-    separate_wider_delim(SampleID,
-                         delim = ".",
-                         names = c("ID", "Treatment", "Zone", "Timepoint"),
-                         cols_remove = FALSE) %>%
+    separate_wider_delim(
+      SampleID,
+      delim = ".",
+      names = c("ID", "Treatment", "Zone", "Timepoint"),
+      cols_remove = FALSE
+    ) %>%
     mutate(
       Zone = factor(Zone),
       Timepoint = factor(Timepoint, levels = c("4weeks", "8weeks", "12weeks"))
@@ -813,9 +980,11 @@ run_eigengene_zone_time_stats <- function(MEs, datTraits, prefix) {
   
   me_long <- MEs %>%
     rownames_to_column(var = "SampleID") %>%
-    pivot_longer(cols = starts_with("ME"),
-                 names_to = "Module",
-                 values_to = "Eigengene")
+    pivot_longer(
+      cols = starts_with("ME"),
+      names_to = "Module",
+      values_to = "Eigengene"
+    )
   
   stat_df <- me_long %>%
     left_join(trait_df, by = "SampleID")
@@ -862,20 +1031,24 @@ compare_modules_within_treatment <- function(MEs, datTraits, treatment_name, pre
   
   trait_df <- datTraits %>%
     rownames_to_column(var = "SampleID") %>%
-    separate_wider_delim(SampleID,
-                         delim = ".",
-                         names = c("ID", "Treatment", "Zone", "Timepoint"),
-                         cols_remove = FALSE)
+    separate_wider_delim(
+      SampleID,
+      delim = ".",
+      names = c("ID", "Treatment", "Zone", "Timepoint"),
+      cols_remove = FALSE
+    )
   
   me_long <- MEs %>%
     as.data.frame() %>%
     rownames_to_column(var = "SampleID") %>%
-    pivot_longer(cols = starts_with("ME"),
-                 names_to = "Module",
-                 values_to = "Eigengene")
+    pivot_longer(
+      cols = starts_with("ME"),
+      names_to = "Module",
+      values_to = "Eigengene"
+    )
   
   df <- me_long %>%
-    left_join(trait_df, by = "SampleID") 
+    left_join(trait_df, by = "SampleID")
   
   fit <- lm(Eigengene ~ Module * Zone, data = df)
   
@@ -893,258 +1066,10 @@ compare_modules_within_treatment <- function(MEs, datTraits, treatment_name, pre
 }
 
 # -----------------------------------------------------------------------------
-# 6. EIGENGENE VISUALIZATION
+# 7. PATHWAY ENRICHMENT
 # -----------------------------------------------------------------------------
 
-plot_me_sample_heatmap <- function(MEs, datTraits, prefix) {
-  col_ann <- make_sample_annotation(datTraits)
-  
-  MEs_use <- as.data.frame(MEs)
-  if ("MEgrey" %in% colnames(MEs_use)) {
-    MEs_use <- dplyr::select(MEs_use, -MEgrey)
-  }
-  
-  MEs_use <- MEs_use[order(match(rownames(MEs_use), rownames(col_ann))), , drop = FALSE]
-  col_ann <- col_ann[match(rownames(MEs_use), rownames(col_ann)), , drop = FALSE]
-  
-  filename <- paste0(Dir.f, prefix, "_eigengene_heatmap.pdf")
-  pdf(file = filename, height = 8, width = 6)
-  pheatmap(
-    MEs_use,
-    cluster_col = TRUE,
-    cluster_row = TRUE,
-    show_rownames = FALSE,
-    show_colnames = TRUE,
-    fontsize = 6,
-    annotation_row = col_ann,
-    annotation_colors = ann_color
-  )
-  dev.off()
-}
-
-plot_modules <- function(module_eigengenes, module_color) {
-  ME = module_eigengenes[, paste("ME",module_color, sep="")]
-  ME <- as.data.frame(ME)
-  ME$SampleID <- rownames(module_eigengenes)
-  ME <- ME %>%
-    mutate(Treat = case_when(
-      grepl("Drought",SampleID) ~ "Drought",
-      grepl( "Untrt",SampleID) ~ "Control")) %>%
-    mutate(Time = case_when(
-      grepl("4weeks", SampleID) ~ "4weeks",
-      grepl("8weeks", SampleID) ~ "8weeks",
-      grepl("12weeks", SampleID) ~ "12weeks"
-    ))  
-  ME$Time <- factor(ME$Time, levels = c("4weeks", "8weeks", "12weeks"))
-  
-  barplot_time <- ggplot(ME, aes(x=Treat, y= ME)) +
-    geom_point() + geom_boxplot(fill = module_color) +
-    facet_wrap(~Time) +
-    labs(title = paste(module_color, "module", sep = "_"), y = "Eigengene Expression", x= "Treatment") +
-    theme_bw() +
-    theme(text = element_text(size = size, color = "black"),
-          axis.title.x = element_text(face = "bold"),
-          axis.title.y = element_text(face = "bold"),
-          axis.text.x = element_text(vjust = 1, hjust = 0.5, color = "black"),
-          axis.text.y = element_text(color = "black"))
-  print(barplot_time)
-}
-
-plot_modules_drought_no_time <- function(module_eigengenes, metadata, module_color) {
-  metadata <- metadata %>%
-    rownames_to_column(var = "SampleID") %>%
-    separate_wider_delim(SampleID,
-                         delim = ".",
-                         names = c("ID", "Treatment", "Zone", "Timepoint"),
-                         cols_remove = FALSE)
-  
-  ME = module_eigengenes[, paste("ME",module_color, sep="")]
-  ME <- as.data.frame(ME)
-  ME$SampleID <- rownames(module_eigengenes)
-  ME <- ME %>%
-    merge(metadata, by = "SampleID") %>%
-    mutate(Zone = factor(Zone, levels = c("Bulk", "Rhizo", "RhizoDetritus", "Detritus")))
-  
-  barplot_time <- ggplot(ME, aes(x=Zone, y= ME)) +
-    geom_point() + geom_boxplot(fill = module_color) +
-    labs(title = paste(module_color, "module", sep = "_"), y = "Eigengene Expression", x= "Treatment") +
-    theme_bw() +
-    theme(text = element_text(size = size, color = "black"),
-          axis.title.x = element_text(face = "bold"),
-          axis.title.y = element_text(face = "bold"),
-          axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, color = "black"),
-          axis.text.y = element_text(color = "black"))
-  print(barplot_time)
-}
-
-plot_modules_by_zone <- function(module_eigengenes, metadata, module_color, ncol=2) {
-  metadata <- metadata %>%
-    rownames_to_column(var = "SampleID") %>%
-    separate_wider_delim(SampleID,
-                         delim = ".",
-                         names = c("ID", "Treatment", "Zone", "Timepoint"),
-                         cols_remove = FALSE)
-  
-  ME = module_eigengenes[, paste("ME",module_color, sep="")]
-  ME <- as.data.frame(ME)
-  ME$SampleID <- rownames(module_eigengenes)
-  ME <- ME %>%
-    merge(metadata, by = "SampleID") %>%
-    mutate(Zone = factor(Zone, levels = c("Bulk", "Rhizo", "RhizoDetritus", "Detritus")))
-  
-  ME$Timepoint <- factor(ME$Timepoint, levels = c("4weeks", "8weeks", "12weeks"))
-  
-  barplot_time <- ggplot(ME, aes(x=Timepoint, y= ME)) +
-    geom_point() + geom_boxplot(fill = module_color) +
-    facet_wrap(~Zone, ncol = ncol) +
-    labs(title = paste(module_color, "module", sep = "_"), y = "Eigengene Expression", x= "Treatment") +
-    theme_bw() +
-    theme(text = element_text(size = size, color = "black"),
-          axis.title.x = element_text(face = "bold"),
-          axis.title.y = element_text(face = "bold"),
-          axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, color = "black"),
-          axis.text.y = element_text(color = "black"))
-  print(barplot_time)
-}
-
-plot_modules_by_time <- function(module_eigengenes, metadata, module_color, ncol=2) {
-  metadata <- metadata %>%
-    rownames_to_column(var = "SampleID") %>%
-    separate_wider_delim(SampleID,
-                         delim = ".",
-                         names = c("ID", "Treatment", "Zone", "Timepoint"),
-                         cols_remove = FALSE)
-  
-  ME = module_eigengenes[, paste("ME",module_color, sep="")]
-  ME <- as.data.frame(ME)
-  ME$SampleID <- rownames(module_eigengenes)
-  ME <- ME %>%
-    merge(metadata, by = "SampleID") %>%
-    mutate(Zone = factor(Zone, levels = c("Bulk", "Rhizo", "RhizoDetritus", "Detritus")))
-  
-  ME$Timepoint <- factor(ME$Timepoint, levels = c("4weeks", "8weeks", "12weeks"))
-  
-  barplot_time <- ggplot(ME, aes(x=Zone, y= ME)) +
-    geom_point() + geom_boxplot(fill = module_color) +
-    facet_wrap(~Timepoint, ncol = ncol) +
-    labs(title = paste(module_color, "module", sep = "_"), y = "Eigengene Expression", x= "Treatment") +
-    theme_bw() +
-    theme(text = element_text(size = size, color = "black"),
-          axis.title.x = element_text(face = "bold"),
-          axis.title.y = element_text(face = "bold"),
-          axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1, color = "black"),
-          axis.text.y = element_text(color = "black"))
-  print(barplot_time)
-}
-
-plot_eigengenes_gg <- function(MEs, datTraits,
-                               facet_by = c("Timepoint"),
-                               color_by = "Zone",
-                               shape_by = NULL,
-                               prefix = "plot",
-                               save = TRUE,
-                               order_MEs=order_MEs_colors,
-                               ncol=1,
-                               w = w,
-                               h = h) {
-  library(dplyr)
-  library(tidyr)
-  library(ggplot2)
-  
-  trait_df <- datTraits %>%
-    rownames_to_column(var = "SampleID") %>%
-    separate_wider_delim(SampleID,
-                         delim = ".",
-                         names=c("ID", "Treatment", "Zone", "Timepoint"),
-                         cols_remove = FALSE) %>%
-    mutate(
-      Zone = factor(Zone),
-      Timepoint = factor(Timepoint, levels = c("4weeks", "8weeks", "12weeks")),
-      Treatment = factor(Treatment)
-    )
-  
-  me_long <- as.data.frame(MEs) %>%
-    rownames_to_column(var = "SampleID") %>%
-    pivot_longer(cols = starts_with("ME"),
-                 names_to = "Module",
-                 values_to = "Eigengene") %>%
-    filter(Module != "MEgrey") %>%
-    mutate(Module = substring(Module, 3)) %>%
-    mutate(Module = factor(Module, levels = c(order_MEs)))
-  
-  df <- me_long %>%
-    left_join(trait_df, by = "SampleID") %>%
-    mutate(Zone = factor(Zone, c("Bulk", "Rhizo", "RhizoDetritus", "Detritus")))
-  
-  p <- ggplot(df, aes(x = Module, y = Eigengene, color = Module)) +
-    geom_boxplot(outlier.shape = NA, alpha = 0.6) +
-    geom_jitter(width = 0.2, size = 1.5, alpha = 0.7,
-                aes(shape = if (!is.null(shape_by)) .data[[shape_by]] else NULL)) +
-    scale_color_identity(guide = "legend") +
-    geom_hline(yintercept=0, linetype = "dashed", color = "grey50")
-  
-  p2 <- ggplot(df, aes(x = Zone, y = Eigengene, color = Module)) +
-    geom_boxplot(outlier.shape = NA, alpha = 0.6) +
-    geom_jitter(width = 0.2, size = 1.5, alpha = 0.7,
-                aes(shape = if (!is.null(shape_by)) .data[[shape_by]] else NULL)) +
-    scale_color_identity(guide = "legend") +
-    geom_hline(yintercept=0, linetype = "dashed", color = "grey50")
-  
-  if (length(facet_by) == 1 && facet_by == "Module") {
-    p <- p2 + facet_wrap(as.formula(paste("~", facet_by)), ncol = ncol) +
-      labs(x = "Zone",y = "Eigengene expression",color = color_by)
-  } else if (length(facet_by) == 1) {
-    p <- p + facet_wrap(as.formula(paste("~", facet_by)), ncol = ncol) +
-      labs(x = "Module",y = "Eigengene expression",color = color_by)
-  } else if (length(facet_by) == 2) {
-    p <- p + facet_wrap(as.formula(paste(facet_by[1], "~", facet_by[2])), ncol = ncol) +
-      labs(x = "Module",y = "Eigengene expression",color = color_by)
-  } else {
-    warning("facet_by must be 'Module', a single variable, or two variables")
-  }
-  
-  p <- p +
-    ylim(c(-0.4, 0.4)) +
-    theme_bw() +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),
-      panel.grid   = element_blank(),
-      strip.background = element_rect(fill = "grey90")
-    ) 
-  
-  if (save) {
-    ggsave(
-      filename = paste0(Dir.f, prefix, "_eigengene_plot.pdf"),
-      plot = p,
-      width = w,
-      height = h,
-      units = "in",
-      dpi = 300
-    )
-  }
-  
-  return(p)
-}
-
-plot_eigengenes_by_module <- function(MEs, datTraits, prefix, ncol=4) {
-  modules <- substring(colnames(MEs), 3)
-  
-  for (m in modules) {
-    try({
-      plot_modules_by_time(MEs, datTraits, m, ncol=ncol)
-      ggsave(
-        filename = paste0(Dir.f, prefix, "_", m, "_EGexp_zone_time.png"),
-        width = 5, height = 3, units = "in", dpi = 300
-      )
-    }, silent = TRUE)
-  }
-}
-
-# -----------------------------------------------------------------------------
-# 7. PATHWAY ENRICHMENT — KEGG DOTPLOTS & NETWORKS
-# -----------------------------------------------------------------------------
-
-plot_dp_k <- function(data, module_color, categories=40, Dir=Dir.f) {
+plot_dp_k <- function(data, module_color, categories = 40, Dir = Dir.f) {
   data.mod <- data %>%
     filter(ModuleColor == module_color)
   data.ko <- data.mod$KO
@@ -1153,22 +1078,13 @@ plot_dp_k <- function(data, module_color, categories=40, Dir=Dir.f) {
   print(dp)
 }
 
-plot_dp_m <- function(data, module_color, categories=40, Dir=Dir.f) {
+plot_net_k <- function(data, module_color, categories = 40, Dir = Dir.f) {
   data.mod <- data %>%
     filter(ModuleColor == module_color)
   data.ko <- data.mod$KO
-  m <- enrichMKEGG(gene = data.ko, organism = 'ko', pvalueCutoff = 0.2, qvalueCutoff = 0.2)
-  dp <- enrichplot::dotplot(m, showCategory = categories)
-  print(dp)
-}
-
-plot_net_k <- function(data, module_color, categories=40, Dir=Dir.f) {
-  data.mod <- data %>%
-    filter(ModuleColor == module_color) 
-  data.ko <- data.mod$KO
   k <- enrichKEGG(gene = data.ko, organism = 'ko', pvalueCutoff = 0.05)
   
-  if (is.null(k) || nrow(k@result) == 0 || 
+  if (is.null(k) || nrow(k@result) == 0 ||
       all(k@result$geneID == "") ||
       length(k@geneSets) == 0) {
     message("Skipping cnetplot for: ", module_color)
@@ -1188,14 +1104,23 @@ plot_net_k <- function(data, module_color, categories=40, Dir=Dir.f) {
   return(invisible(nw))
 }
 
-plot_net_m <- function(data, module_color, categories=40, Dir=Dir.f) {
+plot_dp_m <- function(data, module_color, categories = 40, Dir = Dir.f) {
+  data.mod <- data %>%
+    filter(ModuleColor == module_color)
+  data.ko <- data.mod$KO
+  m <- enrichMKEGG(gene = data.ko, organism = 'ko', pvalueCutoff = 0.2, qvalueCutoff = 0.2)
+  dp <- enrichplot::dotplot(m, showCategory = categories)
+  print(dp)
+}
+
+plot_net_m <- function(data, module_color, categories = 40, Dir = Dir.f) {
   data.mod <- data %>%
     filter(ModuleColor == module_color) %>%
     drop_na()
   data.ko <- data.mod$KO
   m <- enrichMKEGG(gene = data.ko, organism = 'ko', pvalueCutoff = 1, qvalueCutoff = 1)
   
-  if (is.null(m) || nrow(m@result) == 0 || 
+  if (is.null(m) || nrow(m@result) == 0 ||
       all(m@result$geneID == "") ||
       length(m@geneSets) == 0) {
     message("Skipping cnetplot for: ", module_color)
@@ -1229,200 +1154,31 @@ run_pathway_plots <- function(gene_table, prefix) {
   
   for (m in modules) {
     plot_dp_k(data.m.df, m)
-    ggsave(paste0(Dir.f, prefix, "_", m, "_dotplot_kegg.png"),
-           width = w, height = h, units = "in", dpi = 300)
+    ggsave(
+      paste0(Dir.f, prefix, "_", m, "_dotplot_kegg.png"),
+      width = w, height = h, units = "in", dpi = 300
+    )
     
     nw_k <- plot_net_k(data.m.df, m)
     if (!is.null(nw_k)) {
-      ggsave(paste0(Dir.f, prefix, "_", m, "_network_kegg.png"),
-             width = w, height = h, units = "in", dpi = 300)
+      ggsave(
+        paste0(Dir.f, prefix, "_", m, "_network_kegg.png"),
+        width = w, height = h, units = "in", dpi = 300
+      )
     }
     
     plot_dp_m(data.m.df, m)
-    ggsave(paste0(Dir.f, prefix, "_", m, "_dotplot_module.png"),
-           width = w, height = h, units = "in", dpi = 300)
+    ggsave(
+      paste0(Dir.f, prefix, "_", m, "_dotplot_module.png"),
+      width = w, height = h, units = "in", dpi = 300
+    )
     
     nw_m <- plot_net_m(data.m.df, m)
     if (!is.null(nw_m)) {
-      ggsave(paste0(Dir.f, prefix, "_", m, "_network_module.png"),
-             width = w, height = h, units = "in", dpi = 300)
+      ggsave(
+        paste0(Dir.f, prefix, "_", m, "_network_module.png"),
+        width = w, height = h, units = "in", dpi = 300
+      )
     }
   }
-}
-
-# -----------------------------------------------------------------------------
-# 8. BIOLOGICAL INTERPRETATION — EXUDATE/LITTER & CYTOSCAPE EXPORT
-# -----------------------------------------------------------------------------
-
-plot_exudate_litter_summary <- function(df_key, prefix) {
-  exudate.list <- read.csv("./data/root_exudate_KOs_5_21_26_Claude.csv", header = TRUE) %>%
-    filter(
-      Role != "Amino acid catabolism",
-      Role != "Amino acid metabolism",
-      Role != "Amino acid uptake",
-      Role != "Compatible solutes",
-      Role != "Glyoxylate cycle",
-      Role != "Ring cleavage",
-      Role != "Small organics",
-      Role != "Organic acid catabolism",
-      Role != "Organic acid uptake"
-    )
-  
-  litter.list <- read.csv("./data/litter_degradation_KOs_5_21_26_Claude.csv", header = TRUE) %>%
-    filter(Litter_Component != "Pectin",
-           Litter_Component != "Arabinogalactan",
-           Litter_Component != "Mannan")
-  
-  exudate.modules <- merge(df_key, exudate.list, by = "KO")
-  litter.modules  <- merge(df_key, litter.list, by = "KO")
-  
-  module.order <- substring(colnames(mergedMEs), 3)
-  module.order <- module.order[module.order != "grey"]
-  
-  exudate.modules$moduleColors <- factor(exudate.modules$moduleColors, levels = module.order)
-  litter.modules$moduleColors  <- factor(litter.modules$moduleColors, levels = module.order)
-  
-  gray_palette_e <- gray.colors(length(unique(exudate.modules$Role)), start = 0.8, end = 0.25)
-  gray_palette_l <- gray.colors(length(unique(litter.modules$Litter_Component)), start = 0.8, end = 0.25)
-  
-  plot.exudate <- exudate.modules %>%
-    ggplot(aes(x = moduleColors, fill = Role)) +
-    geom_bar() +
-    scale_fill_manual(values = gray_palette_e) +
-    theme_bw() +
-    theme(panel.grid = element_blank())
-  ggsave(paste0(Dir.f, prefix, "_exudate_genes.png"),
-         plot = plot.exudate, dpi = 300, height = 4, width = 5, units = "in")
-  
-  plot.litter <- litter.modules %>%
-    ggplot(aes(x = moduleColors, fill = Litter_Component)) +
-    geom_bar() +
-    scale_fill_manual(values = gray_palette_l) +
-    theme_bw() +
-    theme(panel.grid = element_blank())
-  ggsave(paste0(Dir.f, prefix, "_litter_genes.png"),
-         plot = plot.litter, dpi = 300, height = 4, width = 5, units = "in")
-  
-  write.csv(exudate.modules, paste0(Dir.o, prefix, "_exudate_modules.csv"), row.names = FALSE)
-  write.csv(litter.modules,  paste0(Dir.o, prefix, "_litter_modules.csv"),  row.names = FALSE)
-}
-
-plot_exudate_litter_summary_family <- function(df_key, prefix) {
-  exudate.list <- read.csv("./data/root_exudate_consumption_KOs_UPDATED_LH.csv", header = TRUE) %>%
-    filter(
-      Role != "Amino acid catabolism",
-      Role != "Amino acid metabolism",
-      Role != "Amino acid uptake",
-      Role != "Compatible solutes",
-      Role != "Glyoxylate cycle",
-      Role != "Ring cleavage",
-      Role != "Small organics",
-      Role != "Organic acid catabolism",
-      Role != "Organic acid uptake"
-    )
-  
-  litter.list <- read.csv("./data/litter_degradation_KOs_FIXED_LH.csv", header = TRUE) %>%
-    filter(Litter_Component != "Pectin",
-           Litter_Component != "Arabinogalactan",
-           Litter_Component != "Mannan")
-  
-  exudate.modules <- merge(df_key, exudate.list, by = "KO")
-  litter.modules  <- merge(df_key, litter.list, by = "KO")
-  
-  module.order <- substring(colnames(mergedMEs), 3)
-  module.order <- module.order[module.order != "grey"]
-  
-  exudate.modules$moduleColors <- factor(exudate.modules$moduleColors, levels = module.order)
-  litter.modules$moduleColors  <- factor(litter.modules$moduleColors, levels = module.order)
-  
-  gray_palette_e <- gray.colors(length(unique(exudate.modules$Role)), start = 0.8, end = 0.25)
-  gray_palette_l <- gray.colors(length(unique(litter.modules$Litter_Component)), start = 0.8, end = 0.25)
-  
-  gray_palette_ef <- gray.colors(length(unique(exudate.modules$Family)), start = 0.8, end = 0.25)
-  gray_palette_lf <- gray.colors(length(unique(litter.modules$Family)), start = 0.8, end = 0.25)
-  
-  plot.exudate <- exudate.modules %>%
-    ggplot(aes(x = moduleColors, fill = Role)) +
-    geom_bar() +
-    scale_fill_manual(values = gray_palette_e) +
-    theme_bw() +
-    theme(panel.grid = element_blank())
-  ggsave(paste0(Dir.f, prefix, "_exudate_genes.png"),
-         plot = plot.exudate, dpi = 300, height = 4, width = 5, units = "in")
-  
-  plot.exudate.family <- exudate.modules %>%
-    ggplot(aes(x = moduleColors, fill = Family)) +
-    geom_bar() +
-    scale_fill_manual(values = colors) +
-    theme_bw() +
-    theme(panel.grid = element_blank())
-  ggsave(paste0(Dir.f, prefix, "_exudate_genes_family.png"),
-         plot = plot.exudate.family, dpi = 300, height = 4, width = 10, units = "in")
-  
-  plot.litter <- litter.modules %>%
-    ggplot(aes(x = moduleColors, fill = Litter_Component)) +
-    geom_bar() +
-    scale_fill_manual(values = gray_palette_l) +
-    theme_bw() +
-    theme(panel.grid = element_blank())
-  ggsave(paste0(Dir.f, prefix, "_litter_genes.png"),
-         plot = plot.litter, dpi = 300, height = 4, width = 5, units = "in")
-  
-  plot.litter.family <- litter.modules %>%
-    ggplot(aes(x = moduleColors, fill = Family)) +
-    geom_bar() +
-    scale_fill_manual(values = colors) +
-    theme_bw() +
-    theme(panel.grid = element_blank())
-  ggsave(paste0(Dir.f, prefix, "_litter_genes_family.png"),
-         plot = plot.litter.family, dpi = 300, height = 4, width = 10, units = "in")
-  
-  write.csv(exudate.modules, paste0(Dir.o, prefix, "_exudate_modules.csv"), row.names = FALSE)
-  write.csv(litter.modules,  paste0(Dir.o, prefix, "_litter_modules.csv"),  row.names = FALSE)
-}
-
-export_cytoscape_filtered <- function(TOM, datExpr, colors, prefix) {
-  probes <- colnames(datExpr)
-  colors <- colors[probes]
-  
-  keepGenes <- probes[colors != "grey"]
-  inModule <- probes %in% keepGenes
-  modProbes <- probes[inModule]
-  modTOM <- TOM[inModule, inModule]
-  dimnames(modTOM) <- list(modProbes, modProbes)
-  modColors <- colors[inModule]
-  
-  cyt <- exportNetworkToCytoscape(
-    modTOM,
-    edgeFile = paste0(Dir.o, prefix, "_CytoscapeInput_edges.txt"),
-    nodeFile = paste0(Dir.o, prefix, "_CytoscapeInput_nodes.txt"),
-    weighted = TRUE,
-    threshold = cytoscapeThresh,
-    nodeNames = modProbes,
-    nodeAttr = modColors
-  )
-  
-  edge.0 <- as.data.frame(cyt$edgeData)
-  node.0 <- as.data.frame(cyt$nodeData)
-  
-  edge <- edge.0 %>%
-    dplyr::filter(weight > cytoscapeEdgeMin) %>%
-    dplyr::select(-c(fromAltName, toAltName))
-  
-  node.1 <- node.0 %>%
-    merge(., edge, by.x = "nodeName", by.y = "fromNode") %>%
-    dplyr::select(-toNode)
-  
-  node.2 <- node.0 %>%
-    merge(., edge, by.x = "nodeName", by.y = "toNode") %>%
-    dplyr::select(-fromNode)
-  
-  node <- rbind(node.1, node.2) %>%
-    dplyr::distinct(nodeName, .keep_all = TRUE) %>%
-    dplyr::select(-c(weight, direction))
-  
-  write.table(edge, file = paste0(Dir.o, prefix, "_CytoscapeInput_edges_filt.txt"),
-              sep = "\t", row.names = FALSE, quote = FALSE)
-  write.table(node, file = paste0(Dir.o, prefix, "_CytoscapeInput_nodes_filt.txt"),
-              sep = "\t", row.names = FALSE, quote = FALSE)
 }
