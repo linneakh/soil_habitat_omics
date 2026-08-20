@@ -474,18 +474,17 @@ plot_module_trait_with_gene_bars <- function(
     labs(y = "Trait")
   
   exudate.list <- read.csv(
-    "./data/root_exudate_KOs.csv",
+    "./data/root_exudate_KOs_final.csv",
     header = TRUE
   )
   
   litter.list <- read.csv(
-    "./data/litter_KOs.csv",
-    header = TRUE
-  ) %>%
-    filter(
-      Litter_Component != "Chitin",
-      Litter_Component != "Arabinogalactan"
-    )
+    "./data/litter_KOs_final.csv",
+    header = TRUE)  #%>%
+    #filter(
+      # Litter_Category != "Chitin",
+      # Litter_Category != "Arabinogalactan"
+    #)
   
   exudate.modules <- merge(
     df_key,
@@ -529,7 +528,7 @@ plot_module_trait_with_gene_bars <- function(
   
   if (is.null(litter_levels)) {
     litter_levels <- sort(
-      unique(litter.modules$Litter_Component)
+      unique(litter.modules$Litter_Category)
     )
   }
   
@@ -573,14 +572,14 @@ plot_module_trait_with_gene_bars <- function(
   
   litter_counts <- litter.modules %>%
     mutate(
-      Litter_Component = factor(
-        Litter_Component,
+      Litter_Category = factor(
+        Litter_Category,
         levels = litter_levels
       )
     ) %>%
     group_by(
       moduleColors,
-      Litter_Component,
+      Litter_Category,
       .drop = FALSE
     ) %>%
     summarise(
@@ -592,7 +591,7 @@ plot_module_trait_with_gene_bars <- function(
         module_subset,
         levels = module_subset
       ),
-      Litter_Component = factor(
+      Litter_Category = factor(
         litter_levels,
         levels = litter_levels
       ),
@@ -603,8 +602,8 @@ plot_module_trait_with_gene_bars <- function(
         moduleColors,
         levels = module_subset
       ),
-      Litter_Component = factor(
-        Litter_Component,
+      Litter_Category = factor(
+        Litter_Category,
         levels = litter_levels
       )
     )
@@ -661,7 +660,7 @@ plot_module_trait_with_gene_bars <- function(
     aes(
       x = moduleColors,
       y = n,
-      fill = Litter_Component
+      fill = Litter_Category
     )
   ) +
     geom_bar(stat = "identity") +
@@ -674,8 +673,6 @@ plot_module_trait_with_gene_bars <- function(
     theme_bw() +
     theme(
       axis.text.x = element_text(
-        angle = 45,
-        hjust = 1,
         size = 12
       ),
       panel.grid = element_blank(),
@@ -705,6 +702,9 @@ plot_module_trait_with_gene_bars <- function(
     units = "in",
     dpi = 300
   )
+  
+  list.results <- list(exudate.modules, litter.modules)
+  return(list.results)
   
   invisible(combined)
 }

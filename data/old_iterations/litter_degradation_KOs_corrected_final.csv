@@ -1,0 +1,39 @@
+KO,Enzyme,Litter_Component,Stage,Module_Color_Control,Module_Color_Drought
+K01051,Pectinesterase,Pectin,Early,turquoise,turquoise
+K01176,Alpha-amylase,Starch,Early,blue,black
+K01178,Glucoamylase,Starch,Early,black,blue
+K01179,Endoglucanase (cellulase),Cellulose,Mid-Late,black,brown
+K01180,"Endo-1,3(4)-beta-glucanase",Beta-glucan,Mid-Late,turquoise,turquoise
+K01181,"Endo-1,4-beta-xylanase",Xylan,Mid,black,blue
+K01182,"Oligo-1,6-glucosidase",Starch,Early,turquoise,turquoise
+K01183,Chitinase,Chitin,Mid-Late,black,blue
+K01184,Polygalacturonase,Pectin,Early,green,brown
+K01190,Beta-galactosidase,Galactose,Mid,blue,blue
+K01195,Beta-glucuronidase,Pectin,Mid,turquoise,brown
+K01196,Glycogen debranching enzyme,Starch,Early,NA,green
+K01198,Beta-xylosidase,Xylan,Mid-Late,black,blue
+K01204,Alpha-N-acetylgalactosaminidase,Chitin,Mid-Late,black,blue
+K01206,Alpha-L-fucosidase,Arabinan,Early-Mid,black,blue
+K01207,Beta-N-acetylhexosaminidase,Chitin,Late,blue,blue
+K01208,Cyclomaltodextrinase,Starch,Early,grey,green
+K01209,Alpha-L-arabinofuranosidase,Arabinan,Early,blue,blue
+K01213,"Galacturan 1,4-alpha-galacturonidase",Pectin,Early,green,blue
+K01214,Isoamylase,Starch,Early,turquoise,green
+K01218,"Mannan endo-1,4-beta-mannosidase (gmuG)",Mannan,Mid,black,blue
+K01224,"Arabinogalactan endo-beta-1,4-galactosidase",Arabinan,Early,blue,green
+K01225,"Cellulose 1,4-beta-cellobiosidase ",Cellulose,Mid-Late,blue,NA
+K01728,Pectate lyase,Pectin,Early,brown,blue
+K01784,UDP-glucose 4-epimerase,Galactose,Mid,blue,blue
+K05349,Beta-glucosidase,Cellulose,Late,pink,brown
+K05350,Beta-glucosidase,Cellulose,Late,blue,blue
+K05972,Acetylxylan esterase,Xylan,Mid,black,blue
+K06113,"Arabinan endo-1,5-alpha-L-arabinosidase",Arabinan,Early,blue,brown
+K15920,"Xylan 1,4-beta-xylosidase ",Xylan,Mid-Late,black,blue
+K15921,Arabinoxylan arabinofuranohydrolase,Arabinan,Early,black,blue
+K15924,"Glucuronoarabinoxylan endo-1,4-beta-xylanase",Xylan,Mid,black,blue
+K19355,"Endo-1,4-beta-mannanase",Mannan,Mid,green,brown
+K19668,Cellobiohydrolase (CBH2),Cellulose,Mid-Late,black,blue
+K20547,Chitobiosidase,Chitin,Mid-Late,grey,NA
+K20829,"Cellulose 1,4-beta-cellobiosidase",Cellulose,Mid-Late,black,blue
+K20844,Alpha-L-arabinofuranosidase isoform,Arabinan,Early,black,blue
+K22033,Cellulose monooxygenase,Cellulose,Mid-Late,black,blue

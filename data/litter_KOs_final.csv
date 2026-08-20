@@ -1,0 +1,84 @@
+KO,Enzyme,Litter_Component,Litter_Category,Stage
+K01179,Endoglucanase (cellulase) (E3.2.1.4),Cellulose,Cellulose,Mid-Late
+K01188,Beta-glucosidase,Cellulose,Cellulose,Late
+K01225,"Cellulose 1,4-beta-cellobiosidase  (CBH1)",Cellulose,Cellulose,Mid-Late
+K05349,Beta-glucosidase (bglX),Cellulose,Cellulose,Late
+K05350,Beta-glucosidase (bglB),Cellulose,Cellulose,Late
+K19354,Swollenin,Cellulose,Cellulose,Mid
+K19356,Lytic cellulose monooxygenase LPMO (E1.14.99.54),Cellulose,Cellulose,Mid-Late
+K19357,Endoglucanase (cellulase),Cellulose,Cellulose,Mid-Late
+K19668,Cellobiohydrolase (CBH2) (CBH2/cbhA),Cellulose,Cellulose,Mid-Late
+K20829,"Cellulose 1,4-beta-cellobiosidase (celS)",Cellulose,Cellulose,Mid-Late
+K22032,Cellulose monooxygenase,Cellulose,Cellulose,Mid-Late
+K22033,Cellulose monooxygenase (AA9/LPMO),Cellulose,Cellulose,Mid-Late
+K22034,Cellobiose dehydrogenase,Cellulose,Cellulose,Mid-Late
+K01183,Chitinase (E3.2.1.14),Chitin,Chitin,Mid-Late
+K01204,Alpha-N-acetylgalactosaminidase (NAGA),Chitin,Chitin,Mid-Late
+K01207,Beta-N-acetylhexosaminidase (nagZ),Chitin,Chitin,Late
+K03794,Chitin deacetylase,Chitin,Chitin,Mid-Late
+K20547,Chitobiosidase (chitobiosidase),Chitin,Chitin,Mid-Late
+K10804,Cutinase family esterase,Cutin,Cutin/Suberin,Early
+K16992,Cutinase,Cutin,Cutin/Suberin,Early
+K01206,Alpha-L-fucosidase (FUCA),Arabinan,Hemicellulose,Early-Mid
+K01209,Alpha-L-arabinofuranosidase (abfA),Arabinan,Hemicellulose,Early
+K01224,"Arabinogalactan endo-beta-1,4-galactosidase (E3.2.1.89)",Arabinan,Hemicellulose,Early
+K06113,"Arabinan endo-1,5-alpha-L-arabinosidase (abnA)",Arabinan,Hemicellulose,Early
+K15921,Arabinoxylan arabinofuranohydrolase (xynD),Arabinan,Hemicellulose,Early
+K20844,Alpha-L-arabinofuranosidase isoform (abf1),Arabinan,Hemicellulose,Early
+K01180,"Endo-1,3(4)-beta-glucanase (E3.2.1.6)",Glucan,Hemicellulose,Mid-Late
+K01190,Beta-galactosidase (lacZ),Galactose,Hemicellulose,Mid
+K01784,UDP-glucose 4-epimerase (galE/GALE),Galactose,Hemicellulose,Mid
+K01191,Alpha-mannosidase (MAN2C1),Mannan,Hemicellulose,Late
+K01192,Exo-beta-mannanase,Mannan,Hemicellulose,Mid-Late
+K01218,"Mannan endo-1,4-beta-mannosidase (gmuG)",Mannan,Hemicellulose,Mid
+K19355,"Endo-1,4-beta-mannanase (MAN)",Mannan,Hemicellulose,Mid
+K01210,Lichenase (beta-1-3-1-4-glucanase),Glucan,Hemicellulose,Early-Mid
+K19669,Endo-beta-1-3-1-4-glucanase,Glucan,Hemicellulose,Early-Mid
+K01181,"Endo-1,4-beta-xylanase (E3.2.1.8/xynA)",Xylan,Hemicellulose,Mid
+K01198,Beta-xylosidase (xynB),Xylan,Hemicellulose,Mid-Late
+K01732,Alpha-glucuronidase,Xylan,Hemicellulose,Mid-Late
+K05972,Acetylxylan esterase (AXE1),Xylan,Hemicellulose,Mid
+K05973,Glucuronoyl esterase,Xylan,Hemicellulose,Mid-Late
+K14674,Feruloyl esterase,Xylan,Hemicellulose,Mid-Late
+K15531,Oligosaccharide reducing-end xylanase,Xylan,Hemicellulose,Mid
+K15920,"Xylan 1,4-beta-xylosidase  (XYL4)",Xylan,Hemicellulose,Mid-Late
+K15924,"Glucuronoarabinoxylan endo-1,4-beta-xylanase (xynC)",Xylan,Hemicellulose,Mid
+K20845,Endo-1-3-beta-xylanase,Xylan,Hemicellulose,Mid
+K22268,Beta-xylosidase,Xylan,Hemicellulose,Mid-Late
+K01226,Xyloglucanase,Xyloglucan,Hemicellulose,Mid
+K01532,Xyloglucan endo-transglycosylase/hydrolase,Xyloglucan,Hemicellulose,Mid
+K05351,Alpha-xylosidase,Xyloglucan,Hemicellulose,Mid
+K15922,Endo-beta-1-4-glucanase (xyloglucan-specific),Xyloglucan,Hemicellulose,Mid
+K00035,GMC oxidoreductase,Lignin,Lignin,Late
+K00421,Laccase,Lignin,Lignin,Late
+K00430,Class III peroxidase,Lignin,Lignin,Late
+K05871,Versatile peroxidase,Lignin,Lignin,Late
+K05892,Benzoquinone reductase,Lignin,Lignin,Late
+K05909,Laccase,Lignin,Lignin,Late
+K11262,Glyoxal oxidase,Lignin,Lignin,Late
+K15733,DyP-type peroxidase,Lignin,Lignin,Late
+K17067,Aryl-alcohol oxidase,Lignin,Lignin,Late
+K20205,Manganese peroxidase,Lignin,Lignin,Late
+K23514,Peroxidase,Lignin,Lignin,Late
+K23515,Lignin peroxidase,Lignin,Lignin,Late
+K01049,Pectin acetylesterase,Pectin,Pectin,Early
+K01051,Pectinesterase (E3.1.1.11),Pectin,Pectin,Early
+K01184,Polygalacturonase (E3.2.1.15),Pectin,Pectin,Early
+K01195,Beta-glucuronidase (uidA/GUSB),Pectin,Pectin,Mid
+K01213,"Galacturan 1,4-alpha-galacturonidase (E3.2.1.67)",Pectin,Pectin,Early
+K01728,Pectate lyase (pel),Pectin,Pectin,Early
+K01730,Exo-polygalacturonase,Pectin,Pectin,Early
+K05970,Rhamnogalacturonan acetylesterase,Pectin,Pectin,Early
+K05989,Alpha-L-rhamnosidase,Pectin,Pectin,Early
+K18282,Pectate disaccharide-lyase,Pectin,Pectin,Early
+K18650,Rhamnogalacturonan lyase,Pectin,Pectin,Early
+K07407,Alpha-galactosidase (galA/rafA),Pectin,Pectin,Early-Mid
+K12111,Evolved beta-galactosidase (ebgA),Pectin,Pectin,Early-Mid
+K01176,Alpha-amylase (AMY/amyA/malS),Starch,Starch,Early
+K01177,Beta-amylase,Starch,Starch,Early
+K01178,Glucoamylase (SGA1),Starch,Starch,Early
+K01182,"Oligo-1,6-glucosidase (IMA/malL)",Starch,Starch,Early
+K01196,Glycogen debranching enzyme (AGL),Starch,Starch,Early
+K01200,Pullulanase,Starch,Starch,Early
+K01208,Cyclomaltodextrinase (cd/ma/nplT),Starch,Starch,Early
+K01214,Isoamylase (ISA/treX),Starch,Starch,Early

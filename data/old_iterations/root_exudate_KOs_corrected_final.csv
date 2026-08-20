@@ -1,0 +1,47 @@
+KO,Enzyme,Root_Exudate_Class,Role,Tier,Module_Color_Control,Module_Color_Drought,KEGG_Level4
+K00033,6-phosphogluconate dehydrogenase,Gluconate,Phosphate solubilization,2,brown,blue,6-phosphogluconate dehydrogenase
+K00117,Glucose dehydrogenase periplasmic (gcd),Glucose/Gluconate,Phosphate solubilization,1,grey,NA,NA
+K00118,Glucose-fructose oxidoreductase,Glucose/Fructose,Sugar catabolism,2,brown,green,glucose-fructose oxidoreductase
+K00121,Alcohol dehydrogenase (adh),Ethanol/Methanol,Small organic catabolism,2,brown,black,S-(hydroxymethyl)glutathione dehydrogenase / alcohol dehydrogenase
+K00239,Succinate dehydrogenase (sdhA),Succinate,Organic acid catabolism,2,turquoise,turquoise,succinate dehydrogenase flavoprotein subunit
+K00240,Succinate dehydrogenase subunit B,Succinate,Organic acid catabolism,2,turquoise,turquoise,succinate dehydrogenase iron-sulfur subunit
+K00260,Glutamate dehydrogenase (aspB),Aspartate,Amino acid catabolism,2,brown,black,glutamate dehydrogenase
+K00262,Glutamate dehydrogenase (gdh),Glutamate,Amino acid catabolism,2,turquoise,blue,glutamate dehydrogenase (NADP+)
+K00294,1-pyrroline-5-carboxylate dehydrogenase,Proline,Proline catabolism (step 2),2,turquoise,turquoise,1-pyrroline-5-carboxylate dehydrogenase
+K00448,"Protocatechuate 3,4-dioxygenase alpha (pcaG)",Phenylpropanoids,Ring cleavage,2,turquoise,NA,NA
+K00449,"Protocatechuate 3,4-dioxygenase beta (pcaH)",Phenylpropanoids,Ring cleavage,2,brown,brown,"protocatechuate 3,4-dioxygenase, beta subunit"
+K00656,Pyruvate formate-lyase (pflB),Formate/Pyruvate,Small organic catabolism,2,brown,green,formate C-acetyltransferase
+K00819,Ornithine--oxo-acid transaminase (rocD/OAT),Amino acids,Amino acid catabolism,2,turquoise,turquoise,ornithine--oxo-acid transaminase
+K00822,Beta-alanine--pyruvate transaminase,Beta-alanine/Amino acids,Amino acid catabolism,2,grey,green,beta-alanine--pyruvate transaminase
+K00823,4-aminobutyrate aminotransferase (puuE),GABA,GABA catabolism,2,black,blue,4-aminobutyrate aminotransferase
+K00826,Branched-chain aminotransferase (ilvE),BCAA,Amino acid catabolism,2,blue,brown,branched-chain amino acid aminotransferase
+K00847,Fructokinase,Fructose,Fructose catabolism,2,turquoise,turquoise,fructokinase
+K00882,1-phosphofructokinase (fruK),Fructose,Fructose catabolism,2,turquoise,turquoise,1-phosphofructokinase
+K00925,Acetate kinase (ackA),Acetate,Acetate catabolism,2,blue,green,acetate kinase
+K01478,Arginine deiminase (arcA),Arginine,Arginine catabolism,2,brown,green,arginine deiminase
+K01580,Glutamate decarboxylase (gadA/B),Glutamate,Amino acid catabolism,2,brown,brown,glutamate decarboxylase
+K01623,Fructose-bisphosphate aldolase (ALDO),Fructose/Glycolysis,Sugar catabolism,2,grey,black,"fructose-bisphosphate aldolase, class I"
+K01638,Malate synthase (aceB/glcB),Acetate/C2,Glyoxylate cycle,2,grey,green,malate synthase
+K01647,Citrate synthase (CS/gltA),Citrate,Organic acid catabolism (TCA),2,turquoise,tan,citrate synthase
+K01681,Aconitate hydratase (ACO/acnA),Citrate,Organic acid catabolism (TCA),2,greenyellow,purple,aconitate hydratase
+K01783,Ribulose-phosphate 3-epimerase (araD),Arabinose,Arabinose catabolism,2,turquoise,blue,ribulose-phosphate 3-epimerase
+K01805,Xylose isomerase (xylA),Xylose,Xylose catabolism,2,blue,blue,xylose isomerase
+K01895,Acetyl-CoA synthetase (ACSS/acs),Acetate,Acetate catabolism,2,purple,purple,acetyl-CoA synthetase
+K01902,Succinyl-CoA synthetase (sucD),Succinate,Organic acid catabolism,2,turquoise,turquoise,succinyl-CoA synthetase alpha subunit
+K01904,4-coumarate-CoA ligase,Coumarins/Phenylpropanoids,Aromatic activation,1,blue,blue,4-coumarate--CoA ligase
+K01958,Pyruvate carboxylase (PC/pyc),Pyruvate/Anaplerosis,Central metabolism,2,grey,turquoise,pyruvate carboxylase
+K01999,BCAA transport substrate-binding protein (livK),Leu/Ile/Val,Amino acid uptake,2,brown,brown,branched-chain amino acid transport system substrate-binding protein
+K02031,Peptide/nickel transport ATP-binding protein (ddpD),Peptides,Peptide uptake,2,greenyellow,black,peptide/nickel transport system ATP-binding protein
+K02768,Fructose PTS EIIA (fruB),Fructose,Fructose uptake,1,NA,turquoise,fructose PTS system EIIA component
+K02770,Fructose PTS EIIC (fruA),Fructose,Fructose uptake,1,turquoise,turquoise,fructose PTS system EIIBC or EIIC component
+K03332,Fructan beta-fructosidase (levanase),Fructose/Fructan,Fructan catabolism,2,turquoise,turquoise,fructan beta-fructosidase
+K03381,"Catechol 1,2-dioxygenase (catA)",Catechol/Phenolics,Ring cleavage,2,turquoise,brown,"catechol 1,2-dioxygenase"
+K04103,Indolepyruvate decarboxylase (ipdC),Tryptophan/IAA,Auxin-related catabolism,1,black,green,indolepyruvate decarboxylase
+K09470,Gamma-glutamylputrescine synthase (puuA),Putrescine,Polyamine catabolism (step 1),1,grey,brown,gamma-glutamylputrescine synthase
+K10216,2-hydroxymuconate-semialdehyde hydrolase (dmpD/xylF),Catechol/Aromatics,Aromatic catabolism,2,turquoise,brown,2-hydroxymuconate-semialdehyde hydrolase
+K10546,ABC fructose transporter permease,Fructose,Fructose uptake,1,brown,blue,putative multiple sugar transport system substrate-binding protein
+K10548,ABC fructose transporter permease,Fructose,Fructose uptake,1,blue,blue,putative multiple sugar transport system ATP-binding protein
+K10552,ABC fructose transporter permease,Fructose,Fructose uptake,1,turquoise,turquoise,fructose transport system substrate-binding protein
+K10553,ABC fructose transporter permease,Fructose,Fructose uptake,1,turquoise,turquoise,fructose transport system permease protein
+K10554,ABC fructose transporter permease,Fructose,Fructose uptake,1,turquoise,turquoise,fructose transport system ATP-binding protein
+K14083,Rhizopine catabolism enzyme,Rhizopines,Rhizosphere signaling,1,brown,NA,NA

@@ -1,0 +1,98 @@
+KO,Enzyme,Root_Exudate_Class_original,Root_Exudate_Class_v2,Root_Exudate_Class,Tier,Tier_Justification,Source
+K00260,Glutamate dehydrogenase / aminotransferase (aspB),Aspartate,Amino acids,Amino acids,2,Aspartate abundant in root exudates,Added
+K00294,1-pyrroline-5-carboxylate dehydrogenase (E1.2.1.88),Proline,Amino acids,Amino acids,2,Proline catabolism; rhizosphere-enriched,Added
+K00466,Tryptophan 2 3-dioxygenase (kynA),Tryptophan,Amino acids,Amino acids,1,Tryptophan is a major exudate; pathway strongly rhizosphere-associated,Added\
+K00822,Serine-pyruvate aminotransferase,Serine,Amino acids,Amino acids,2,Serine common in root exudates,Added
+K00823,4-aminobutyrate aminotransferase (puuE),GABA,GABA,Amino acids,2,GABA catabolism,Added
+K00826,Branched-chain aminotransferase (ilvE),Branched-chain amino acids,Amino acids,Amino acids,2,Branched-chain AAs in exudates,Original
+K01501,Anthranilate phosphoribosyltransferase (trpD),Tryptophan,Amino acids,Amino acids,2,Tryptophan catabolism pathway,Added
+K01580,Glutamate decarboxylase (gadA/B),Glutamate,Amino acids,Amino acids,2,Glutamate to GABA; highly active in rhizosphere,Added
+K01682,Threonine/serine dehydratase (ilvA),Serine/Threonine,Amino acids,Amino acids,2,Serine/threonine catabolism,Added
+K01895,Amino acid transporter (livH),Leu/Ile/Val,Amino acids,Amino acids,2,Branched-chain AA uptake,Original
+K01999,Glutamine synthetase (glnA),Glutamine/Glutamate,Amino acids,Amino acids,2,Glutamine/glutamate metabolism in rhizosphere,Added
+K02031,ABC amino acid transporter (substrate-binding),Amino acids,Amino acids,Amino acids,2,General amino acid uptake; moderately rhizosphere-enriched,Original
+K03186,Indole-3-pyruvate decarboxylase (ipdC),Tryptophan/IAA,Amino acids,Amino acids,1,Tryptophan/IAA metabolism; nearly exclusive to rhizosphere bacteria (Note: biosynthesis not consumption),Added
+K03320,Ammonium transporter (Amt),Ammonium,Simple N compounds,Amino acids,2,Proline abundant in root exudates,Added
+K00055,Catechol 2 3-dioxygenase (xylE),Catechol/Phenolics,Aromatic,Aromatic & Phenolics,2,Meta-cleavage pathway; common in rhizobacteria,Original\
+K00430,Monooxygenase,Phenolics,Aromatic,Aromatic & Phenolics,2,Phenolics in root exudates,Original
+K00448,Protocatechuate 3 4-dioxygenase alpha (pcaG),Phenylpropanoids,Aromatic,Aromatic & Phenolics,2,Phenolic ring cleavage; rhizosphere-enriched,Original\
+K00449,Protocatechuate 3 4-dioxygenase beta (pcaH),Phenylpropanoids,Aromatic,Aromatic & Phenolics,2,Always paired with pcaG,Original\
+K00487,Trans-cinnamate 4-monooxygenase,Coumarins,Aromatic,Aromatic & Phenolics,1,Coumarin/hydroxycinnamic acid catabolism; root-exudate specific,Added
+K01901,Caffeate/coumarate CoA ligase (fcs),Phenylpropanoids,Aromatic,Aromatic & Phenolics,2,Activates hydroxycinnamic acids from exudates,Added
+K01904,4-coumarate-CoA ligase,Coumarins/Phenylpropanoids,Aromatic,Aromatic & Phenolics,1,Coumarins are a root-specific exudate class; dedicated pathway,Added
+K03268,4-hydroxybenzoate hydroxylase (pobA),4-Hydroxybenzoate,Aromatic,Aromatic & Phenolics,2,Common phenolic intermediate in exudates,Added
+K03381,Catechol 1 2-dioxygenase (catA),Catechol/Phenolics,Aromatic,Aromatic & Phenolics,2,Catechol from phenolic exudates,Added\
+K04103,Benzoate 1 2-dioxygenase alpha (benA),Benzoate,Aromatic,Aromatic & Phenolics,2,Benzoate is a major phenolic exudate,Added\
+K05605,Vanillate O-demethylase (vanA),Vanillate,Aromatic,Aromatic & Phenolics,2,Vanillic acid in root exudates,Added
+K05810,Salicylate hydroxylase,Salicylate,Aromatic,Aromatic & Phenolics,2,Phenolic acid in grass exudates,New_Addition
+K13224,DIBOA-glucoside dioxygenase,Benzoxazinoids,Benzoxazinoids,Aromatic & Phenolics,3,Some grasses exude benzoxazinoids; check Avena literature for relevance,New_Addition}
+K01188,Beta-galactosidase,Galactose/Mucilage,Polysaccharides,Complex carbohydrates,2,Polysaccharide breakdown from mucilage,New_Addition
+K01426,Beta-glucosidase,Glucosides/Cellobiose,Polysaccharides,Complex carbohydrates,1,Mucilage polysaccharides and cell wall fragments; rhizosphere-enriched,New_Addition
+K05349,Beta-glucuronidase,Glucuronides,Polysaccharides,Complex carbohydrates,2,Mucilage polysaccharides,New_Addition
+K00660,Chalcone synthase (microbial degradation),Flavonoids,Flavonoids,Flavonoids,1,Microbial flavonoid degradation; near-exclusive to rhizosphere,Added
+K04100,Isoflavone reductase,Isoflavonoids,Flavonoids,Flavonoids,1,Isoflavonoids are root-specific signals; strongly rhizosphere-associated,Added
+K10216,Flavonoid 3-dioxygenase,Flavonoids,Flavonoids,Flavonoids,1,Flavonoids are almost exclusively root-exuded; highly rhizosphere-specific,Added
+K10217,Chalcone isomerase,Flavonoids,Flavonoids,Flavonoids,1,Flavonoid catabolism; root-exudate specific,Added
+K00017,Ribulokinase (araB),Arabinose,Arabinose,Mucilage sugars,2,Arabinose catabolism,Added
+K00848,Rhamnulokinase (rhaB),Rhamnose/Mucilage,Sugars,Mucilage sugars,1,Rhamnose catabolism; mucilage-specific,Added
+K00854,Xylulokinase (xylB),Xylose,Xylose,Mucilage sugars,2,Xylose catabolism,Added
+K00879,Fucokinase (fucK),Fucose/Mucilage,Sugars,Mucilage sugars,1,Fucose catabolism; mucilage-specific,Added
+K00900,Arabinose ABC transporter substrate-binding (araF),Arabinose,Arabinose,Mucilage sugars,2,Arabinose in root mucilage exudates,Added
+K01783,Ribulose-phosphate 3-epimerase (araD),Arabinose,Arabinose,Mucilage sugars,2,Arabinose catabolism,Added
+K01786,Arabinose isomerase (araA),Arabinose,Arabinose,Mucilage sugars,2,Arabinose catabolism,Added
+K01805,Xylose isomerase (xylA),Xylose,Xylose,Mucilage sugars,2,Xylose catabolism; pairs with transporter,Added
+K01817,L-rhamnose isomerase (rhaA),Rhamnose/Mucilage,Sugars,Mucilage sugars,1,Rhamnose exuded in mucilage; higher in rhizosphere than litter,Added
+K01818,L-fucose isomerase (fucI),Fucose/Mucilage,Sugars,Mucilage sugars,1,Fucose is root mucilage-specific; not abundant in litter,Added
+K10537,Arabinose ABC transporter permease (araH),Arabinose,Arabinose,Mucilage sugars,2,Dedicated arabinose transporter,Added
+K10973,Xylose ABC transporter substrate-binding (xylF),Xylose,Xylose,Mucilage sugars,2,Xylose exuded from roots; dedicated transporter,Added
+K10974,Xylose ABC transporter permease (xylH),Xylose,Xylose,Mucilage sugars,2,Dedicated xylose transporter,Added
+K00016,L-lactate dehydrogenase,Lactate,Organic acid,Organic acids,2,Alternative lactate oxidation pathway,New_Addition
+K00033,6-phosphogluconate dehydrogenase (gnd),Gluconate,Gluconate,Organic acids,2,Pentose phosphate pathway from gluconate,Added
+K00101,Lactate dehydrogenase (ldhA),Lactate,Organic acid,Organic acids,2,Lactate catabolism; common in grass exudates,New_Addition
+K00239,Succinate dehydrogenase (sdhA),Succinate,Organic acid,Organic acids,2,Succinate oxidation,Original
+K00240,Succinate dehydrogenase subunit B (sdhB),Succinate,Organic acid,Organic acids,2,Succinate oxidation,Added
+K00656,Pyruvate formate-lyase (pflB),Formate/Pyruvate,Organic acid,Organic acids,2,Formate catabolism from exudates (Note: typically anaerobic; microaerobic niches only),Original
+K00851,Gluconate kinase (gntK),Gluconate,Gluconate,Organic acids,1,Gluconate catabolism in phosphate-solubilizing rhizobacteria,Added
+K00925,Phosphotransacetylase (pta),Acetate,Organic acid,Organic acids,2,Acetate catabolism; pairs with ackA,Added
+K01034,Acetate-CoA ligase (acsA),Acetate,Organic acid,Organic acids,2,High-affinity acetate activation; rhizosphere-relevant,Added
+K01610,Isocitrate lyase (aceA),Acetate/C2 substrates,Organic acid,Organic acids,2,Glyoxylate cycle allows growth on C2 exudates; rhizosphere-enriched,Added
+K01612,Malate synthase (aceB),Acetate/C2 substrates,Organic acid,Organic acids,2,Glyoxylate cycle,Original
+K01631,Formyl-CoA transferase (frc),Oxalate,Organic acid,Organic acids,1,Oxalate-specific catabolism,Added
+K01638,Oxalyl-CoA decarboxylase (oxc),Oxalate,Organic acid,Organic acids,1,Oxalate-specific catabolism,Added
+K01647,Malate dehydrogenase (mdh),Malate,Organic acid,Organic acids,2,Malate abundant in exudates; TCA enzyme also in bulk soil,Original
+K01681,Fumarase (fumA/B),Fumarate,Organic acid,Organic acids,2,Fumarate in exudates; TCA enzyme,Original
+K01902,Succinyl-CoA synthetase (sucD),Succinate,Organic acid,Organic acids,2,Succinate in exudates; TCA enzyme,Original
+K01958,Pyruvate carboxylase (PC),Pyruvate,Organic acid,Organic acids,2,Pyruvate abundant in exudates; TCA enzyme also in bulk soil (Note: biosynthetic not uptake),Original
+K03459,Oxalate transporter (oxlT),Oxalate,Organic acid,Organic acids,1,Oxalate highly concentrated in root exudates; dedicated transporter,Added
+K08349,TRAP transporter (organic acids),Malate/Citrate/Succinate,Organic acid,Organic acids,2,TRAP transporters enriched in rhizosphere for organic acid uptake,Original
+K11103,Citrate:succinate antiporter (citT),Citrate,Organic acid,Organic acids,1,Dedicated citrate uptake transporter; highly rhizosphere-enriched,New_Addition
+K14448,Lactate dehydrogenase (cytochrome),Lactate,Organic acid,Organic acids,1,Lactate common in grass root exudates; membrane-bound oxidation,New_Addition
+K16157,Acetate kinase (ackA),Acetate,Organic acid,Organic acids,2,Acetate is a common C2 exudate,Original
+K18102,Tartronate semialdehyde reductase,Tartrate/Glycolate,Organic acid,Organic acids,2,Tartrate is an organic acid exudate,New_Addition
+K00308,Putrescine oxidase,Putrescine,Polyamine,Polyamine,1,Putrescine-specific oxidase; rhizosphere-enriched,Added
+K09470,Polyamine oxidase,Putrescine/Spermidine,Polyamine,Polyamine,1,Polyamines actively exuded by roots; catabolism strongly rhizosphere-enriched,Added
+K00117,Glucose dehydrogenase periplasmic (gcd),Glucose/Gluconate,Glucose,Simple sugars,1,Periplasmic glucose oxidation to gluconate; strongly rhizosphere-specific,Added
+K00118,Glucose-fructose oxidoreductase,Glucose/Fructose,Glucose/Fructose,Simple sugars,2,Rhizosphere sugar catabolism,Original
+K00616,Sucrose phosphorylase,Sucrose,Sucrose,Simple sugars,2,Alternative sucrose cleavage; sucrose-specific,Original
+K00844,Glucokinase (glk),Glucose,Glucose,Simple sugars,2,Glucose exudate catabolism; present in bulk soil too,Original
+K00845,Hexokinase,Glucose/Fructose,Glucose/Fructose,Simple sugars,2,Glucose/fructose exudate catabolism,Original
+K00847,Fructokinase,Fructose,Fructose,Simple sugars,2,Fructose catabolism,Original
+K00882,1-phosphofructokinase (fruK),Fructose,Fructose,Simple sugars,2,Acts on fructose-1-phosphate from PTS; rhizosphere-relevant,Original
+K01193,Invertase / beta-fructofuranosidase,Sucrose,Sucrose,Simple sugars,2,Sucrose is a dominant root exudate; invertase releases glucose/fructose,Original
+K01623,Phosphofructokinase (pfkA),Fructose,Fructose,Simple sugars,2,Fructose catabolism; pairs with PTS uptake,Original
+K02768,Fructose PTS EIIA (fruB),Fructose,Fructose,Simple sugars,1,Dedicated fructose PTS; strongly rhizosphere-enriched,Original
+K02769,Fructose PTS EIIB (fruA/fruAb),Fructose,Fructose,Simple sugars,1,Dedicated fructose PTS; strongly rhizosphere-enriched,Original
+K02770,Fructose PTS EIIC (fruA),Fructose,Fructose,Simple sugars,1,Dedicated fructose PTS; strongly rhizosphere-enriched,Original
+K02771,Fructose PTS EIIC (fruA) isozyme,Fructose,Fructose,Simple sugars,1,Dedicated fructose PTS; strongly rhizosphere-enriched,Original
+K02777,PTS glucose transporter (ptsG),Glucose,Glucose,Simple sugars,2,Glucose highly abundant in exudates but ptsG not exclusive to rhizosphere,Original
+K10546,ABC fructose transporter permease,Fructose,Fructose,Simple sugars,1,Dedicated fructose ABC transporter; rhizosphere-enriched,Original
+K10548,ABC fructose transporter permease,Fructose,Fructose,Simple sugars,1,Dedicated fructose ABC transporter; rhizosphere-enriched,Original
+K10552,ABC fructose transporter permease (malE/frcB),Fructose,Fructose,Simple sugars,1,Dedicated fructose ABC transporter; rhizosphere-enriched,Original
+K10553,ABC fructose transporter permease,Fructose,Fructose,Simple sugars,1,Dedicated fructose ABC transporter; rhizosphere-enriched,Original
+K10554,ABC fructose transporter permease,Fructose,Fructose,Simple sugars,1,Dedicated fructose ABC transporter; rhizosphere-enriched,Original
+K11194,Fructose PTS system (fruA),Fructose,Fructose,Simple sugars,1,Dedicated fructose PTS; strongly rhizosphere-enriched,Original
+K11195,Fructose PTS system (fruB),Fructose,Fructose,Simple sugars,1,Dedicated fructose PTS; strongly rhizosphere-enriched,Original
+K11196,Fructose PTS system (fructose-specific),Fructose,Fructose,Simple sugars,1,Dedicated fructose PTS; strongly rhizosphere-enriched,Original
+K11201,Fructose PTS system,Fructose,Fructose,Simple sugars,1,Dedicated fructose PTS; strongly rhizosphere-enriched,Original
+K11203,Fructose PTS system,Fructose,Fructose,Simple sugars,1,Dedicated fructose PTS; strongly rhizosphere-enriched,Original
+K12201,MFS transporter (glucose/fructose),Glucose/Fructose,Glucose/Fructose,Simple sugars,1,Dedicated sugar MFS; enriched in rhizosphere competence studies,Original

@@ -1,0 +1,91 @@
+KO,Enzyme,Root_Exudate,Root_Exudate_Class,Role,Tier,Tier_Justification,Module_Color_Control,Module_Color_Drought
+K02768,Fructose PTS EIIA (fruB),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose PTS; fructose dominant early-stage Avena barbata exudate (Zhalnina 2018),turquoise,turquoise
+K02769,Fructose PTS EIIB (fruA/fruAb),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose PTS; fructose dominant in Avena exudates,NA,turquoise
+K02770,Fructose PTS EIIBC/EIIC (fruA),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose PTS; fructose dominant early-stage Avena barbata exudate (Zhalnina 2018),turquoise,turquoise
+K02771,Fructose PTS EIIC isozyme (fruA),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose PTS; fructose dominant in Avena exudates,NA,NA
+K11194,Fructose PTS system (fruA),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose PTS component; rhizosphere-enriched,NA,NA
+K11195,Fructose PTS system (fruB),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose PTS component; rhizosphere-enriched,NA,NA
+K11196,Fructose PTS system (fructose-specific),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose PTS component; rhizosphere-enriched,NA,NA
+K11201,Fructose PTS system,Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose PTS component; rhizosphere-enriched,NA,NA
+K11203,Fructose PTS system,Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose PTS component; rhizosphere-enriched,NA,NA
+K10546,ABC sugar transport substrate-binding protein (chvE),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose ABC transporter; rhizosphere-enriched,brown,blue
+K10548,ABC sugar transport ATP-binding protein (gguA),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose ABC transporter; rhizosphere-enriched,blue,blue
+K10552,Fructose ABC transport substrate-binding protein (frcB),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose ABC transporter; rhizosphere-enriched,turquoise,turquoise
+K10553,Fructose ABC transport permease (frcC),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose ABC transporter; rhizosphere-enriched,turquoise,turquoise
+K10554,Fructose ABC transport ATP-binding protein (frcA),Fructose,Simple sugars,Fructose uptake,1,Dedicated fructose ABC transporter; rhizosphere-enriched,turquoise,turquoise
+K12201,MFS transporter glucose/fructose,Glucose/Fructose,Simple sugars,Sugar uptake,1,Dedicated sugar MFS; enriched in rhizosphere competence studies,NA,NA
+K00847,Fructokinase (scrK),Fructose,Simple sugars,Fructose catabolism,2,Phosphorylates fructose; pairs with PTS/ABC uptake; fructose dominant in Avena exudates,turquoise,turquoise
+K00882,1-phosphofructokinase (fruK),Fructose,Simple sugars,Fructose catabolism,2,Acts on fructose-1-phosphate from PTS; dedicated fructose catabolism,turquoise,turquoise
+K03332,Fructan beta-fructosidase / levanase (fruA),Fructose/Fructan,Simple sugars,Fructan catabolism,2,Hydrolyzes fructans released from grass roots; major C source in California grasslands,turquoise,turquoise
+K01623,Fructose-bisphosphate aldolase (ALDO),Fructose/Glycolysis,Simple sugars,Sugar catabolism,2,Glycolytic enzyme processing exudate-derived fructose and glucose,grey,black
+K00118,Glucose-fructose oxidoreductase (gfo),Glucose/Fructose,Simple sugars,Sugar catabolism,2,Oxidoreduction of root exudate sugars; glucose and fructose in Avena exudates,brown,green
+K00844,Glucokinase (glk),Glucose,Simple sugars,Glucose catabolism,2,Glucose confirmed in Avena barbata exudates (Zhalnina 2018),NA,NA
+K00845,Hexokinase,Glucose/Fructose,Simple sugars,Sugar catabolism,2,Glucose and fructose both confirmed in Avena exudates,NA,NA
+K01193,Invertase / beta-fructofuranosidase,Sucrose,Simple sugars,Sucrose catabolism,2,Sucrose dominant early-stage Avena barbata exudate (Zhalnina 2018),NA,NA
+K01805,Xylose isomerase (xylA),Xylose,Mucilage sugars,Xylose catabolism,2,Xylose from root mucilage and cell wall turnover,blue,blue
+K00854,Xylulokinase (xylB),Xylose,Mucilage sugars,Xylose catabolism,2,Xylose catabolism; pairs with xylose isomerase,NA,NA
+K10973,Xylose ABC transporter substrate-binding (xylF),Xylose,Mucilage sugars,Xylose uptake,2,Dedicated xylose transporter; xylose from root mucilage,NA,NA
+K10974,Xylose ABC transporter permease (xylH),Xylose,Mucilage sugars,Xylose uptake,2,Dedicated xylose transporter permease,NA,NA
+K01783,Ribulose-phosphate 3-epimerase (rpe/RPE),Arabinose,Mucilage sugars,Arabinose catabolism,2,Arabinose from root mucilage; pentose phosphate pathway,turquoise,blue
+K01786,Arabinose isomerase (araA),Arabinose,Mucilage sugars,Arabinose catabolism,2,Arabinose catabolism; arabinose in root mucilage,NA,NA
+K00017,Ribulokinase (araB),Arabinose,Mucilage sugars,Arabinose catabolism,2,Arabinose catabolism; pairs with araA,NA,NA
+K00900,Arabinose ABC transporter substrate-binding (araF),Arabinose,Mucilage sugars,Arabinose uptake,2,Dedicated arabinose transporter; arabinose in root mucilage,NA,NA
+K10537,Arabinose ABC transporter permease (araH),Arabinose,Mucilage sugars,Arabinose uptake,2,Dedicated arabinose transporter permease,NA,NA
+K01818,L-fucose isomerase (fucI),Fucose/Mucilage,Mucilage sugars,Mucilage sugar catabolism,1,Fucose is root mucilage-specific; not abundant in litter,NA,NA
+K00879,Fucokinase (fucK),Fucose/Mucilage,Mucilage sugars,Mucilage sugar catabolism,1,Fucose catabolism; mucilage-specific,NA,NA
+K01817,L-rhamnose isomerase (rhaA),Rhamnose/Mucilage,Mucilage sugars,Mucilage sugar catabolism,1,Rhamnose from root mucilage; higher in rhizosphere than litter,NA,NA
+K00848,Rhamnulokinase (rhaB),Rhamnose/Mucilage,Mucilage sugars,Mucilage sugar catabolism,1,Rhamnose catabolism; mucilage-specific,NA,NA
+K00117,Quinoprotein glucose dehydrogenase (gcd),Glucose/Gluconate,Simple sugars,Phosphate solubilization,1,Periplasmic glucose oxidation to gluconate; strongly rhizosphere-specific phosphate solubilization,grey,NA
+K00033,6-phosphogluconate dehydrogenase (PGD/gnd/gntZ),Gluconate,Organic acids,Phosphate solubilization,2,Pentose phosphate pathway; processes gluconate from periplasmic glucose oxidation,brown,blue
+K01647,Citrate synthase (CS/gltA),Citrate,Organic acids,Organic acid catabolism (TCA),2,Citrate abundant in grass root exudates; TCA entry point,turquoise,tan
+K01681,Aconitate hydratase (ACO/acnA),Citrate/Isocitrate,Organic acids,Organic acid catabolism (TCA),2,TCA enzyme processing citrate from root exudates,greenyellow,purple
+K01902,Succinyl-CoA synthetase alpha subunit (sucD),Succinate,Organic acids,Organic acid catabolism,2,Succinate documented in grass root exudates; TCA enzyme,turquoise,turquoise
+K00239,Succinate dehydrogenase flavoprotein subunit (sdhA/frdA),Succinate,Organic acids,Organic acid catabolism,2,Oxidizes succinate from root exudates; TCA/respiratory chain,turquoise,turquoise
+K00240,Succinate dehydrogenase iron-sulfur subunit (sdhB/frdB),Succinate,Organic acids,Organic acid catabolism,2,Succinate dehydrogenase iron-sulfur subunit; pairs with sdhA,turquoise,turquoise
+K01958,Pyruvate carboxylase (PC/pyc),Pyruvate/Anaplerosis,Organic acids,Central metabolism,2,Anaplerotic TCA replenishment when growing on exudate carbon,grey,turquoise
+K11103,C4-dicarboxylate transporter (dctA),Malate/Succinate/Fumarate,Organic acids,Organic acid uptake,1,Aerobic C4-dicarboxylate transporter; takes up malate succinate fumarate; rhizosphere-enriched,turquoise,turquoise
+K00925,Acetate kinase (ackA),Acetate,Organic acids,Acetate catabolism,2,Phosphorylates acetate for assimilation; acetate in grass rhizosphere,blue,green
+K01895,Acetyl-CoA synthetase (ACSS/acs),Acetate,Organic acids,Acetate catabolism,2,High-affinity acetate activation; important at low exudate concentrations,purple,purple
+K01034,Acetate-CoA ligase (acsA),Acetate,Organic acids,Acetate catabolism,2,Acetate activation; acetate in grass rhizosphere,NA,NA
+K16157,Acetate kinase (ackA),Acetate,Organic acids,Acetate catabolism,2,Acetate catabolism; C2 exudate,NA,NA
+K01610,Isocitrate lyase (aceA),Acetate/C2,Organic acids,Glyoxylate cycle,2,Glyoxylate cycle allows growth on C2 compounds from exudates,NA,black
+K01612,Malate synthase (aceB/glcB),Acetate/C2,Organic acids,Glyoxylate cycle,2,Glyoxylate cycle; allows growth on acetate/C2 exudates,NA,NA
+K00656,Formate C-acetyltransferase (pflD),Formate/Pyruvate,Organic acids,Small organic catabolism,2,Pyruvate formate-lyase; processes formate under low oxygen in rhizosphere microaggregates,brown,green
+K00121,S-(hydroxymethyl)glutathione dehydrogenase / ADH (frmA/ADH5),Ethanol/Methanol,Organic acids,Small organic catabolism,2,Oxidizes alcohols and aldehydes; minor rhizosphere component,brown,black
+K03459,Oxalate transporter (oxlT),Oxalate,Organic acids,Organic acid uptake,1,Oxalate highly concentrated in root exudates; dedicated transporter,NA,NA
+K01638,Malate synthase (aceB/glcB) / oxalate metabolism,Oxalate/Acetate,Organic acids,Glyoxylate cycle,2,Glyoxylate cycle enzyme; oxalate and acetate catabolism,grey,green
+K01631,Formyl-CoA transferase (frc),Oxalate,Organic acids,Organic acid catabolism,1,Oxalate catabolism; oxalate concentrated in root exudates,NA,NA
+K00003,Homoserine dehydrogenase (hom/HSD),Homoserine,Amino acids,Amino acid catabolism,1,Homoserine confirmed dominant early-stage Avena barbata exudate (Zhalnina 2018),turquoise,turquoise
+K00928,Homoserine kinase (thrB),Homoserine,Amino acids,Amino acid catabolism,1,Homoserine catabolism; homoserine dominant early-stage Avena barbata exudate (Zhalnina 2018),turquoise,blue
+K00260,Glutamate dehydrogenase (gudB/rocG),Glutamate/Aspartate,Amino acids,Amino acid catabolism,2,Glutamate and aspartate among most abundant amino acids in Avena exudates (Zhalnina 2018),brown,black
+K00262,Glutamate dehydrogenase NADP+ (gdhA),Glutamate,Amino acids,Amino acid catabolism,2,NADP-linked glutamate dehydrogenase; glutamate confirmed in Avena exudates,turquoise,blue
+K01580,Glutamate decarboxylase (gadA/gadB/GAD),Glutamate/GABA,Amino acids,GABA catabolism,2,Converts glutamate to GABA; GABA abundant in root exudates (Canarini 2019; Dietz 2020),brown,brown
+K00823,4-aminobutyrate aminotransferase (puuE),GABA,Amino acids,GABA catabolism,2,GABA catabolism; GABA among most abundant amino acids in root exudates,black,blue
+K00819,Ornithine--oxo-acid transaminase (rocD/OAT),Ornithine/Proline,Amino acids,Amino acid catabolism,2,Catabolizes ornithine; proline and arginine in Avena exudates,turquoise,turquoise
+K00294,1-pyrroline-5-carboxylate dehydrogenase (E1.2.1.88),Proline,Amino acids,Proline catabolism (step 2),2,Second step proline oxidation; proline in root exudates; increases under drought (Gargallo-Garriga 2018),turquoise,turquoise
+K00826,Branched-chain amino acid aminotransferase (ilvE),BCAA (Leu/Ile/Val),Amino acids,Amino acid catabolism,2,BCAA catabolism; branched-chain AAs in Avena exudates (Zhalnina 2018),blue,brown
+K01478,Arginine deiminase (arcA),Arginine,Amino acids,Arginine catabolism,2,Arginine catabolism; arginine detected in Avena barbata exudates (Zhalnina 2018),brown,green
+K00822,Beta-alanine--pyruvate transaminase (E2.6.1.18),Beta-alanine,Amino acids,Amino acid catabolism,2,Beta-alanine catabolism; propanoate pathway; present in grass rhizosphere,grey,green
+K01682,Threonine/serine dehydratase (ilvA),Serine/Threonine,Amino acids,Amino acid catabolism,2,Serine and threonine catabolism; both in root exudates,NA,NA
+K01501,Anthranilate phosphoribosyltransferase (trpD),Tryptophan,Amino acids,Amino acid catabolism,2,Tryptophan catabolism pathway; tryptophan confirmed in Avena barbata rhizosphere (Jaeger 1999),NA,NA
+K01999,BCAA transport substrate-binding protein (livK),Leu/Ile/Val,Amino acids,Amino acid uptake,2,BCAA uptake; branched-chain AAs in Avena exudates (Zhalnina 2018),brown,brown
+K09470,Gamma-glutamylputrescine synthase (puuA),Putrescine,Quaternary amines,Polyamine catabolism (step 1),1,First step putrescine catabolism; Quaternary amines actively exuded by roots; rhizosphere-enriched,grey,brown
+K00241,Nicotinate dehydrogenase subunit (ndh),Nicotinate,Aromatics/Phenolics,Aromatic acid catabolism,1,Nicotinic acid specifically preferred substrate for Avena barbata rhizosphere bacteria (Zhalnina 2018),turquoise,turquoise
+K00763,Nicotinate phosphoribosyltransferase (pncB),Nicotinate,Aromatics/Phenolics,Nicotinate salvage/catabolism,1,Nicotinic acid specifically consumed by Avena rhizosphere bacteria (Zhalnina 2018),blue,brown
+K00800,Shikimate kinase (aroK),Shikimate,Aromatics/Phenolics,Aromatic acid catabolism,1,Shikimic acid confirmed preferred substrate in Avena barbata rhizosphere (Zhalnina 2018),blue,blue
+K00480,Salicylate hydroxylase (nahH/salA),Salicylate,Aromatics/Phenolics,Aromatic acid catabolism,1,Salicylic acid confirmed preferred substrate in Avena barbata rhizosphere (Zhalnina 2018),NA,NA
+K01904,4-coumarate-CoA ligase (4CL),Coumarins/Phenylpropanoids,Aromatics/Phenolics,Aromatic acid activation,1,Cinnamic acid in Avena barbata; coumarins in Avena fatua exudates (Iannucci 2012; Zhalnina 2018),blue,blue
+K00466,"Tryptophan 2,3-dioxygenase (kynA)",Tryptophan,Aromatics/Phenolics,Tryptophan catabolism,1,Tryptophan confirmed in Avena barbata rhizosphere (Jaeger 1999); strongly rhizosphere-associated,NA,NA
+K03186,Indole-3-pyruvate decarboxylase (ipdC),Tryptophan/IAA,Aromatics/Phenolics,Auxin-related catabolism,1,IAA confirmed preferred substrate in Avena barbata rhizosphere bacteria (Zhalnina 2018),NA,NA
+K04103,Indolepyruvate decarboxylase (ipdC),Tryptophan/IAA,Aromatics/Phenolics,Auxin-related catabolism,1,IAA confirmed preferred substrate in Avena barbata rhizosphere bacteria (Zhalnina 2018),black,green
+K03381,"Catechol 1,2-dioxygenase (catA)",Catechol/Phenolics,Aromatics/Phenolics,Ring cleavage,2,Catechol from aromatic acid degradation; downstream of salicylate/cinnamate in Avena rhizosphere,turquoise,brown
+K10216,2-hydroxymuconate-semialdehyde hydrolase (dmpD/xylF),Catechol/Aromatics,Aromatics/Phenolics,Aromatic catabolism,2,Meta-cleavage pathway; downstream of catechol from Avena-confirmed aromatic exudates,turquoise,brown
+K00448,"Protocatechuate 3,4-dioxygenase alpha (pcaG)",Phenylpropanoids,Aromatics/Phenolics,Ring cleavage,2,Phenolic ring cleavage; downstream of aromatic exudate catabolism,turquoise,NA
+K00449,"Protocatechuate 3,4-dioxygenase beta (pcaH)",Phenylpropanoids,Aromatics/Phenolics,Ring cleavage,2,Always paired with pcaG; phenolic ring cleavage,brown,brown
+K03268,4-hydroxybenzoate hydroxylase (pobA),4-Hydroxybenzoate,Aromatics/Phenolics,Aromatic catabolism,2,Common phenolic intermediate in rhizosphere aromatic catabolism,NA,NA
+K05605,Vanillate O-demethylase (vanA),Vanillate,Aromatics/Phenolics,Aromatic catabolism,2,Vanillic acid in Avena fatua exudates (Iannucci 2012),NA,NA
+K01901,Caffeate/coumarate CoA ligase (fcs),Phenylpropanoids,Aromatics/Phenolics,Aromatic activation,2,Activates hydroxycinnamic acids from exudates; cinnamic acid in Avena exudates,NA,NA
+K00055,"Catechol 2,3-dioxygenase (xylE)",Catechol/Phenolics,Aromatics/Phenolics,Ring cleavage,2,Meta-cleavage pathway; common in rhizobacteria consuming phenolic exudates,NA,NA
+K00130,Betaine-aldehyde dehydrogenase (betB),Betaine/Quaternary amines,Quaternary amines,Quaternary amine catabolism,1,Quaternary amines including betaine confirmed in Avena barbata exudates (Zhalnina 2018),blue,black
+K14083,Rhizopine catabolism enzyme,Rhizopines,Quaternary amines,Rhizosphere signaling/catabolism,1,Rhizopines are plant-root-specific compounds; nearly exclusive to rhizosphere bacteria,brown,NA
+K01488,Adenosine deaminase (add),Amino acids/Adenosine,Amino acids,Nucleoside catabolism,2,Amino acids confirmed in Avena barbata exudates (Zhalnina 2018),blue,blue

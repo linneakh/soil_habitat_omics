@@ -419,7 +419,7 @@ order_MEs_colors.fig <- c(
 full_module_trait <- compute_module_trait_heatmap(
   MEs = mergedMEs,
   datTraits = datTraits,
-  prefix = "FigSx_full",
+  prefix = "full",
   module_order = order_MEs
 )
 
@@ -445,28 +445,29 @@ plot_module_trait_with_gene_bars(
     "Bulk"
   ),
   module_subset = order_MEs_colors.fig,
-  prefix = "other/full_heatmap_genes_combined"
+  prefix = "other/full_combined"
 )
 
 
 #set exudate and litter components to plot:
 common_exudates <- c(
-  "Amino acids", "Aromatic & Phenolics",
-  "Flavonoids", "Mucilage sugars",
+  "Amino acids", "Aromatics/Phenolics",
+  "Flavonoids", 
+  "Quaternary amines",
+  "Mucilage sugars",
   "Organic acids",
   "Simple sugars"
 )
 
 common_litter <- c(
-  "Arabinan", "Cellulose", 
-  "Cutin", "Lignin",
-  "Mannan",
-  "Pectin", "Starch",
-  "Xylan", "Xyloglucan"
+  "Cellulose", 
+  "Chitin", "Cutin/Suberin", 
+  "Hemicellulose", "Lignin",
+  "Pectin", "Starch"
 )
 
 
-plot_module_trait_with_gene_bars(
+full_module_trait_figure_w_genes <- plot_module_trait_with_gene_bars(
   full_results = full_module_trait,
   df_key = full_keys$df_key,
   trait_subset = c(
@@ -482,7 +483,7 @@ plot_module_trait_with_gene_bars(
 )
 
 
-plot_module_trait_with_gene_bars(
+subset_module_trait_figure_w_genes <- plot_module_trait_with_gene_bars(
   full_results = full_module_trait_primary_fig,
   df_key = full_keys$df_key,
   trait_subset = c(
@@ -495,6 +496,11 @@ plot_module_trait_with_gene_bars(
   exudate_levels = common_exudates,
   litter_levels = common_litter
 )
+
+#save tables of root exudate and litter degradation genes for table Sx
+write.csv(as.data.frame(subset_module_trait_figure_w_genes[1]), "./output/WGCNA/drought/TableSx_module_exudate.csv")
+write.csv(as.data.frame(subset_module_trait_figure_w_genes[2]), "./output/WGCNA/drought/TableSx_litter.csv")
+
 
 # ----------------------------
 # 17. Eigengene visualization

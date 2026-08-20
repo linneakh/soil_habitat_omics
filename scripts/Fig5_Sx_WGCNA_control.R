@@ -448,19 +448,20 @@ full_module_trait_primary_fig <- plot_module_trait_heatmap_subset(
 )
 
 #set exudate and litter components to plot:
+#set exudate and litter components to plot:
 common_exudates <- c(
-  "Amino acids", "Aromatic & Phenolics",
-  "Flavonoids", "Mucilage sugars",
-  "Oragnic acids",
+  "Amino acids", "Aromatics/Phenolics",
+  "Quaternary amines",
+  "Mucilage sugars",
+  "Organic acids",
   "Simple sugars"
 )
 
 common_litter <- c(
-  "Arabinan", "Cellulose", 
-  "Cutin", "Lignin",
-  "Mannan",
-  "Pectin", "Starch",
-  "Xylan", "Xyloglucan"
+  "Cellulose", 
+  "Chitin", "Cutin/Suberin", 
+  "Hemicellulose", "Lignin",
+  "Pectin", "Starch"
 )
 
 
@@ -479,7 +480,7 @@ plot_module_trait_with_gene_bars(
   litter_levels = common_litter
 )
 
-plot_module_trait_with_gene_bars(
+subset_module_trait_figure_w_genes <- plot_module_trait_with_gene_bars(
   full_results = full_module_trait_primary_fig,
   df_key = full_keys$df_key,
   trait_subset = c(
@@ -493,6 +494,9 @@ plot_module_trait_with_gene_bars(
   litter_levels = common_litter
 )
 
+#save tables of root exudate and litter degradation genes for table Sx
+write.csv(as.data.frame(subset_module_trait_figure_w_genes[1]), "./output/WGCNA/control/TableSx_module_exudate.csv")
+write.csv(as.data.frame(subset_module_trait_figure_w_genes[2]), "./output/WGCNA/control/TableSx_litter.csv")
 
 # ----------------------------
 # 17. Eigengene visualization

@@ -1,0 +1,10 @@
+KO,Enzyme,Root_Exudate_Class,Role,Tier,Literature_Justification,Module_Color_Control,Module_Color_Drought
+K00003,Homoserine dehydrogenase (hom/HSD),Homoserine,Amino acid catabolism,1,Homoserine confirmed in early-stage Avena barbata exudates (Zhalnina 2018); catalyzes key step in homoserine metabolism,turquoise,NA
+K00241,Nicotinate dehydrogenase subunit (ndh),Nicotinate,Aromatic acid catabolism,1,Nicotinic acid is a specifically preferred substrate for Avena barbata rhizosphere bacteria (Zhalnina 2018),turquoise,turquoise
+K00928,Homoserine kinase (thrB),Homoserine,Amino acid catabolism,1,Homoserine metabolism; homoserine confirmed as dominant early-stage Avena barbata exudate (Zhalnina 2018),turquoise,blue
+K00480,Salicylate hydroxylase (nahH/salA),Salicylate,Aromatic acid catabolism,1,Salicylic acid confirmed preferred substrate in Avena barbata rhizosphere (Zhalnina 2018),NA,NA
+K01488,Adenosine deaminase (add),Nucleosides/Adenosine,Nucleoside catabolism,2,Nucleosides confirmed in Avena barbata exudates (Zhalnina 2018),blue,blue
+K00130,Betaine-aldehyde dehydrogenase (betB),Betaine/Quaternary amines,Quaternary amine catabolism,1,Quaternary amines including betaine confirmed in Avena barbata exudates (Zhalnina 2018),blue,black
+K00763,Nicotinate phosphoribosyltransferase (pncB),Nicotinate,Nicotinate salvage/catabolism,1,Nicotinic acid specifically consumed by Avena rhizosphere bacteria (Zhalnina 2018),blue,brown
+K00800,Shikimate kinase (aroK),Shikimate,Aromatic acid catabolism,1,Shikimic acid confirmed preferred substrate in Avena barbata rhizosphere (Zhalnina 2018),blue,blue
+K00928,Homoserine kinase (thrB),Homoserine,Amino acid catabolism,1,Homoserine metabolism; homoserine confirmed in early-stage Avena exudates (Zhalnina 2018),turquoise,blue
