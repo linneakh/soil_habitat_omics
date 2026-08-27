@@ -8,7 +8,7 @@ col_list2 = colors = c("black","gray","coral4","coral",
                        "darkred", "darksalmon","green4",
                        "greenyellow","orange",
                        "moccasin",   "hotpink4")
-col_list_zone = c("red", "orange", "green",  "blue",  "purple", "pink")
+col_list_zone = c("green", "blue", "orange",  "red")
 col_list_treatment = c("darkred", "darkgreen")
 
 
