@@ -8,7 +8,7 @@ library(emmeans)
 # ----------------------------
 # plot parameters
 # ----------------------------
-source("./scripts/qSIP/EAF-functions.R")
+source("./scripts/functions/EAF-functions.R")
 
 col_list_det <- c("orange", "blue")
 col_list_det_light <- c( "#FAD88E","lightblue")
@@ -34,6 +34,9 @@ w <- 6.5
 res <- 300
 size <- 10
 
+Dir.o <- "./output/qSIP/"
+Dir.f <- "./figures/Fig6_Sx_qSIP/"
+
 # ----------------------------
 # assumptions for absolute abundance
 # ----------------------------
@@ -43,8 +46,8 @@ fgC_per_cell <- 10
 # ----------------------------
 # load data
 # ----------------------------
-ps <- readRDS("./data/unfractionated_itag/DRIP16S_phyloseq.Rds")
-eaf <- read.csv("./output/qSIP/16S/16S_EAF_13C_w_taxonomy.csv", header = TRUE)
+ps <- readRDS("./data/qSIP/DRIP16S_phyloseq.Rds")
+eaf <- read.csv("./output/qSIP/16S_EAF_13C_w_taxonomy.csv", header = TRUE)
 q_copies <- read.csv("./output/qSIP/copies_per_g_dry_soil_for_quantitative_analysis.csv")
 
 # ============================
@@ -327,14 +330,14 @@ final_labeled_c <- final_labeled_c %>%
 # ============================
 # write.csv(
 #   final_labeled_c,
-#   "./output/qSIP/16S/ASV_labeled_C_fg_per_sample_from_fractions.csv",
+#   paste(Dir.o, "ASV_labeled_C_fg_per_sample_from_fractions.csv"),
 #   row.names = FALSE
 # )
 
 # ============================
 # 14) plotting subsets
 # ============================
-final_labeled_c <- read.csv("./output/qSIP/16S/ASV_labeled_C_fg_per_sample_from_fractions.csv",
+final_labeled_c <- read.csv(paste(Dir.o, "ASV_labeled_C_fg_per_sample_from_fractions.csv"),
                                                         header = TRUE)
 final_labeled_c_rhizo <- final_labeled_c %>%
   filter(labeled_c_fg > 0) %>%
@@ -394,6 +397,14 @@ final_labeled_c_f_det_total <- final_labeled_c_det %>%
   filter(labeled_c_fg > 0) %>%
   filter(grepl("Detritus.13C", labeled_c)) %>%
   group_by(SampleID, Habitat, Moisture, family) %>%
+  summarise(sum = sum(labeled_c_fg)) %>%
+  mutate(Habitat = factor(Habitat, levels = c("13C-Detritus", 
+                                              "12C-Rhizo + 13C-Detritus")))
+
+final_labeled_c_g_det_total <- final_labeled_c_det %>%
+  filter(labeled_c_fg > 0) %>%
+  filter(grepl("Detritus.13C", labeled_c)) %>%
+  group_by(SampleID, Habitat, Moisture, genus) %>%
   summarise(sum = sum(labeled_c_fg)) %>%
   mutate(Habitat = factor(Habitat, levels = c("13C-Detritus", 
                                               "12C-Rhizo + 13C-Detritus")))

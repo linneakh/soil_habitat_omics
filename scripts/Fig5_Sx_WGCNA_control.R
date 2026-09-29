@@ -459,7 +459,8 @@ common_exudates <- c(
 
 common_litter <- c(
   "Cellulose", 
-  "Chitin", "Cutin/Suberin", 
+  "Chitin", 
+  #"Cutin/Suberin", 
   "Hemicellulose", "Lignin",
   "Pectin", "Starch"
 )

@@ -1,0 +1,79 @@
+KO,Enzyme,Litter_Component,Litter_Category,Stage,Fungal_Normal_Module,Fungal_Drought_Module,Bacteria_Normal_Module,Bacteria_Drought_Module
+K01208,Cyclomaltodextrinase (cd/ma/nplT),Starch,Starch,Early,Not detected,Not detected,grey,Not detected
+K01196,Glycogen debranching enzyme (AGL),Starch,Starch,Early,blue,black,grey,green
+K01178,Glucoamylase (SGA1),Starch,Starch,Early,yellow,greenyellow,black,blue
+K01176,Alpha-amylase (AMY/amyA/malS),Starch,Starch,Early,yellow,tan,blue,black
+K01182,"Oligo-1,6-glucosidase (IMA/malL)",Starch,Starch,Early,Not detected,brown,turquoise,turquoise
+K01214,Isoamylase (ISA/treX),Starch,Starch,Early,Not detected,Not detected,turquoise,green
+K01188,Beta-glucosidase (E3.2.1.21),Cellulose,Cellulose,Late,magenta,pink,Not detected,Not detected
+K05349,Beta-glucosidase (bglX),Cellulose,Cellulose,Late,grey,black,pink,brown
+K19069,Cellobiose dehydrogenase (CDH),Cellulose,Cellulose,Mid-Late,blue,brown,brown,Not detected
+K18786,Cellobionic acid phosphorylase (E2.4.1.321),Cellulose,Cellulose,Late,blue,pink,pink,Not detected
+K19356,"Lytic cellulose monooxygenase, C1-hydroxylating (LPMO9/AA9)",Cellulose,Cellulose,Mid-Late,blue,black,black,blue
+K22032,"Lytic cellulose monooxygenase, C4-dehydrogenating (LPMO)",Cellulose,Cellulose,Mid-Late,magenta,brown,Not detected,Not detected
+K19357,Cellulase (CELB),Cellulose,Cellulose,Mid-Late,magenta,brown,brown,Not detected
+K01179,Endoglucanase (cellulase) (E3.2.1.4),Cellulose,Cellulose,Mid-Late,Not detected,Not detected,black,brown
+K19668,Cellobiohydrolase (CBH2) (CBH2/cbhA),Cellulose,Cellulose,Mid-Late,blue,black,black,blue
+K20829,"Cellulose 1,4-beta-cellobiosidase (celS)",Cellulose,Cellulose,Mid-Late,Not detected,Not detected,black,blue
+K22033,Cellulose monooxygenase (AA9/LPMO),Cellulose,Cellulose,Mid-Late,Not detected,Not detected,black,blue
+K01225,"Cellulose 1,4-beta-cellobiosidase (CBH1)",Cellulose,Cellulose,Mid-Late,blue,black,blue,Not detected
+K05350,Beta-glucosidase (bglB),Cellulose,Cellulose,Late,Not detected,Not detected,blue,blue
+K20628,Expansin (exlX),Cellulose (non-hydrolytic loosening),Cellulose,Early,Not detected,green,black,blue
+K15923,Alpha-L-fucosidase 2 (AXY8/FUC95A/afcA),Arabinan,Hemicellulose,Early-Mid,Not detected,Not detected,black,blue
+K25880,L-arabinitol 4-dehydrogenase (LADA),Arabinan,Hemicellulose,Early-Mid,Not detected,brown,Not detected,Not detected
+K17738,D-arabinitol 2-dehydrogenase (ARD),Arabinan,Hemicellulose,Early-Mid,blue,red,Not detected,Not detected
+K01206,Alpha-L-fucosidase (FUCA),Arabinan,Hemicellulose,Early-Mid,Not detected,Not detected,black,blue
+K15921,Arabinoxylan arabinofuranohydrolase (xynD),Arabinan,Hemicellulose,Early,brown,greenyellow,black,blue
+K20844,Alpha-L-arabinofuranosidase isoform (abf1),Arabinan,Hemicellulose,Early,brown,Not detected,black,blue
+K01209,Alpha-L-arabinofuranosidase (abfA),Arabinan,Hemicellulose,Early,Not detected,brown,blue,blue
+K01224,"Arabinogalactan endo-beta-1,4-galactosidase (E3.2.1.89)",Arabinan,Hemicellulose,Early,Not detected,Not detected,blue,green
+K06113,"Arabinan endo-1,5-alpha-L-arabinosidase (abnA)",Arabinan,Hemicellulose,Early,Not detected,Not detected,blue,brown
+K01216,Licheninase (bglS),Beta-glucan,Hemicellulose,Mid,blue,black,Not detected,Not detected
+K01190,Beta-galactosidase (lacZ),Galactose,Hemicellulose,Mid,Not detected,brown,blue,blue
+K01784,UDP-glucose 4-epimerase (galE/GALE),Galactose,Hemicellulose,Mid,pink,greenyellow,blue,blue
+K01199,"Glucan endo-1,3-beta-D-glucosidase (EGLC)",Glucan,Hemicellulose,Mid-Late,blue,black,Not detected,brown
+K01210,"Glucan 1,3-beta-glucosidase (E3.2.1.58)",Glucan,Hemicellulose,Mid-Late,yellow,blue,Not detected,Not detected
+K01180,"Endo-1,3(4)-beta-glucanase (E3.2.1.6)",Glucan,Hemicellulose,Mid-Late,Not detected,yellow,turquoise,turquoise
+K19355,"Endo-1,4-beta-mannanase (MAN)",Mannan,Hemicellulose,Mid,Not detected,Not detected,green,Not detected
+K01191,Alpha-mannosidase (MAN2C1),Mannan,Hemicellulose,Mid-Late,greenyellow,pink,Not detected,blue
+K08257,"Mannan endo-1,6-alpha-mannosidase (E3.2.1.101)",Mannan,Hemicellulose,Mid-Late,blue,black,black,Not detected
+K01218,"Mannan endo-1,4-beta-mannosidase (gmuG)",Mannan,Hemicellulose,Mid,Not detected,Not detected,black,blue
+K16559,"Endo-1,3-1,4-beta-glycanase (ExoK)",Mixed-linkage glucan,Hemicellulose,Mid,Not detected,black,blue,blue
+K05351,D-xylulose reductase (E1.1.1.9),Xylan,Hemicellulose,Mid-Late,Not detected,black,Not detected,Not detected
+K14273,D-xylose 1-dehydrogenase (xdh),Xylan,Hemicellulose,Mid-Late,yellow,blue,magenta,brown
+K17743,D-xylose reductase (XYL1/XYRA),Xylan,Hemicellulose,Mid-Late,blue,pink,Not detected,Not detected
+K01181,"Endo-1,4-beta-xylanase (E3.2.1.8/xynA)",Xylan,Hemicellulose,Mid,blue,black,black,blue
+K01198,Beta-xylosidase (xynB),Xylan,Hemicellulose,Mid-Late,Not detected,yellow,black,blue
+K05972,Acetylxylan esterase (AXE1),Xylan,Hemicellulose,Mid,blue,brown,black,blue
+K15920,"Xylan 1,4-beta-xylosidase (XYL4)",Xylan,Hemicellulose,Mid-Late,greenyellow,brown,black,blue
+K15924,"Glucuronoarabinoxylan endo-1,4-beta-xylanase (xynC)",Xylan,Hemicellulose,Mid,green,Not detected,black,blue
+K18576,"Xyloglucan-specific endo-beta-1,4-glucanase (XEG)",Xyloglucan,Hemicellulose,Mid,Not detected,brown,black,blue
+K18578,"Xyloglucan-specific exo-beta-1,4-glucanase (CEL74A)",Xyloglucan,Hemicellulose,Mid-Late,Not detected,brown,black,black
+K01443,N-acetylglucosamine-6-phosphate deacetylase (nagA),Chitin,Chitin,Late,Not detected,salmon,salmon,Not detected
+K01452,Chitin deacetylase (E3.5.1.41),Chitin,Chitin,Mid-Late,brown,yellow,turquoise,turquoise
+K12373,Hexosaminidase (HEXA_B),Chitin,Chitin,Late,brown,brown,blue,blue
+K01183,Chitinase (E3.2.1.14),Chitin,Chitin,Mid-Late,blue,blue,black,blue
+K01204,Alpha-N-acetylgalactosaminidase (NAGA),Chitin,Chitin,Mid-Late,Not detected,Not detected,black,blue
+K01207,Beta-N-acetylhexosaminidase (nagZ),Chitin,Chitin,Late,Not detected,brown,blue,blue
+K01184,Polygalacturonase (E3.2.1.15),Pectin,Pectin,Early,Not detected,Not detected,green,brown
+K05989,Alpha-L-rhamnosidase (ramA),Pectin,Pectin,Early,Not detected,Not detected,grey,Not detected
+K01213,"Galacturan 1,4-alpha-galacturonidase (E3.2.1.67)",Pectin,Pectin,Early-Mid,Not detected,brown,green,blue
+K01728,Pectate lyase (pel),Pectin,Pectin,Early,brown,brown,brown,blue
+K18103,L-threo-3-deoxy-hexylosonate aldolase (GAAC),Pectin,Pectin,Mid,red,purple,purple,Not detected
+K18106,D-galacturonate reductase (GAAA),Pectin,Pectin,Mid,red,Not detected,Not detected,Not detected
+K07407,Alpha-galactosidase (galA/rafA),Pectin,Pectin,Early-Mid,green,brown,black,blue
+K12111,Evolved beta-galactosidase (ebgA),Pectin,Pectin,Early-Mid,yellow,Not detected,black,blue
+K01051,Pectinesterase (E3.1.1.11),Pectin,Pectin,Early,Not detected,Not detected,turquoise,turquoise
+K01195,Beta-glucuronidase (uidA/GUSB),Pectin,Pectin,Mid,Not detected,Not detected,turquoise,brown
+K20929,Glyoxal/methylglyoxal oxidase (GLX),Lignin,Lignin,Late,blue,purple,purple,Not detected
+K04098,"Hydroxyquinol 1,2-dioxygenase (chqB)",Lignin-derived aromatics,Lignin,Late,Not detected,yellow,grey,brown
+K03381,"Catechol 1,2-dioxygenase (catA)",Lignin-derived aromatics,Lignin,Late,blue,red,turquoise,brown
+K00449,"Protocatechuate 3,4-dioxygenase beta subunit (pcaH)",Lignin-derived aromatics,Lignin,Late,pink,pink,brown,brown
+K01055,3-oxoadipate enol-lactonase (pcaD),Lignin-derived aromatics,Lignin,Late,pink,green,turquoise,turquoise
+K01857,"3-carboxy-cis,cis-muconate cycloisomerase (pcaB)",Lignin-derived aromatics,Lignin,Late,brown,brown,Not detected,Not detected
+K07824,Benzoate 4-monooxygenase (CYP53A1),Lignin-derived aromatics,Lignin,Late,blue,black,black,Not detected
+K03380,"Phenol 2-monooxygenase, NADPH (E1.14.13.7)",Lignin-derived aromatics,Lignin,Late,black,yellow,Not detected,Not detected
+K10621,"2,3-dihydroxy-p-cumate/2,3-dihydroxybenzoate 3,4-dioxygenase (cmtC/dhbA)",Lignin-derived aromatics,Lignin,Late,brown,Not detected,grey,turquoise
+K01904,4-coumarate--CoA ligase (4CL),Lignin-derived aromatics,Lignin,Late,red,Not detected,blue,blue
+K21802,Vanillin dehydrogenase (vdh),Lignin-derived aromatics,Lignin,Late,tan,Not detected,blue,blue
+K07535,2-hydroxycyclohexanecarboxyl-CoA dehydrogenase (badH),Lignin-derived aromatics,Lignin,Late,tan,yellow,blue,brown

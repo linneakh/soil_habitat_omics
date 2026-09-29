@@ -46,7 +46,7 @@ source("./scripts/functions/NMDS_plotting_functions.R")
 df <- read.csv("./data/FTICR/Report_processed_noNorm_MolecFormulas.csv", header = TRUE)
 
 #all compounds
-# df.all <- read.csv("./data/FTICR/Report_processed_noNorm.csv", header = TRUE)
+df.all <- read.csv("./data/FTICR/Report_processed_noNorm.csv", header = TRUE)
 
 metadata <- read.csv("./data/FTICR/metadata.csv", header = TRUE) %>% select(-notes)
 

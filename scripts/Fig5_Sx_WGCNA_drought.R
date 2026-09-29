@@ -452,7 +452,7 @@ plot_module_trait_with_gene_bars(
 #set exudate and litter components to plot:
 common_exudates <- c(
   "Amino acids", "Aromatics/Phenolics",
-  "Flavonoids", 
+  #"Flavonoids", 
   "Quaternary amines",
   "Mucilage sugars",
   "Organic acids",
@@ -461,7 +461,8 @@ common_exudates <- c(
 
 common_litter <- c(
   "Cellulose", 
-  "Chitin", "Cutin/Suberin", 
+  "Chitin", 
+  #"Cutin/Suberin", 
   "Hemicellulose", "Lignin",
   "Pectin", "Starch"
 )

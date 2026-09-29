@@ -277,7 +277,8 @@ compute_gene_membership_table <- function(datExpr, datTraits, colors, MEs, prefi
 # -----------------------------------------------------------------------------
 
 compute_module_trait_heatmap <- function(MEs, datTraits, prefix,
-                                         trait_order = c("Bulk", "Rhizo", "RhizoDet", "Detritus"),
+                                         trait_order = c("Bulk",  "Rhizo", 
+                                                         "RhizoDet", "Detritus"),
                                          module_order = colnames(orderMEs(MEs))) {
   nSamples <- nrow(datTraits)
   
@@ -474,12 +475,12 @@ plot_module_trait_with_gene_bars <- function(
     labs(y = "Trait")
   
   exudate.list <- read.csv(
-    "./data/root_exudate_KOs_final.csv",
+    "./data/root_exudate_KOs_final_v2.csv",
     header = TRUE
   )
   
   litter.list <- read.csv(
-    "./data/litter_KOs_final.csv",
+    "./data/litter_KOs_final_v2.csv",
     header = TRUE)  #%>%
     #filter(
       # Litter_Category != "Chitin",
@@ -673,7 +674,9 @@ plot_module_trait_with_gene_bars <- function(
     theme_bw() +
     theme(
       axis.text.x = element_text(
-        size = 12
+        size = 12,
+        angle = 45,
+        hjust = 1
       ),
       panel.grid = element_blank(),
       legend.key.width = unit(0.5, "cm"),
@@ -889,6 +892,7 @@ plot_eigengenes_gg <- function(MEs, datTraits,
   
   return(p)
 }
+
 
 # -----------------------------------------------------------------------------
 # 6. STATISTICAL TESTING
