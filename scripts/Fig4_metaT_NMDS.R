@@ -210,4 +210,123 @@ ggsave(filename,units=c('in'),width=w,height=h,dpi=res)
 filename <- paste0(Dir.f, "fungi_nmds_zone_timepoint.pdf")
 ggsave(filename,units=c('in'),width=w,height=h,dpi=res)
 
+####-------fungal nmds filter to untrt----------####
+# Distance
+metaT.f.control <- metaT.f %>%
+  filter(grepl("Untrt", rownames(.))) 
+metadata.f.control <- metadata.f %>%
+  filter(Treatment == "Untrt")
+
+dist <- vegdist(metaT.f.control, method = "euclidean")
+
+
+# NMDS
+set.seed(123)  # for reproducibility
+
+nmds <- metaMDS(
+  dist,
+  k = 2,          # 2D solution
+  trymax = 100,   # increase if convergence is difficult
+  autotransform = FALSE
+)
+
+
+# Plot with your helpers (now site_scores carries Cluster from metadata_nmds)
+nmds$stress
+
+#extract coordinates
+nmds_df <- as.data.frame(scores(nmds))
+nmds_df$sample <- rownames(nmds_df)
+
+
+# merge with metadata
+nmds_df <- merge(nmds_df, metadata.f.control, by.x = "sample", by.y = "row.names", all = TRUE) %>%
+  select( -SampleID_num) %>%
+  column_to_rownames(var = "sample")
+
+metadata.f.control <- metadata.f.control %>%
+  filter(rownames(.) %in% rownames(nmds_df))
+
+# PERMANOVA (marginal effects)
+distmat <- dist
+
+adonis2(distmat ~ Zone+Timepoint, metadata.f.control, permutations = 999, by = "margin")
+# adonis2(formula = distmat ~ Zone + Treatment + Timepoint, data = metadata.f, permutations = 999, by = "margin")
+# Df SumOfSqs      R2      F Pr(>F)    
+# Zone       3    93141 0.14058 3.8404  0.001 ***
+#   Treatment  1    14685 0.02216 1.8164  0.021 *  
+#   Timepoint  2    20359 0.03073 1.2591  0.126    
+# Residual  66   533573 0.80532                  
+# Total     72   662563 1.00000   
+
+
+
+
+### nmds plot (timepoint and moisture)
+w=10
+h=8
+
+#plot zone and treatment
+make_nmds_plot(nmds_df, Group1 =Zone, Group2 =Timepoint,col_list=col_list)
+
+
+####-------fungal nmds filter to drought----------####
+# Distance
+metaT.f.drought <- metaT.f %>%
+  filter(grepl("Drought", rownames(.))) 
+metadata.f.drought <- metadata.f %>%
+  filter(Treatment == "Drought")
+
+dist <- vegdist(metaT.f.drought, method = "euclidean")
+
+
+# NMDS
+set.seed(123)  # for reproducibility
+
+nmds <- metaMDS(
+  dist,
+  k = 2,          # 2D solution
+  trymax = 100,   # increase if convergence is difficult
+  autotransform = FALSE
+)
+
+
+# Plot with your helpers (now site_scores carries Cluster from metadata_nmds)
+nmds$stress
+
+#extract coordinates
+nmds_df <- as.data.frame(scores(nmds))
+nmds_df$sample <- rownames(nmds_df)
+
+
+# merge with metadata
+nmds_df <- merge(nmds_df, metadata.f.drought, by.x = "sample", by.y = "row.names", all = TRUE) %>%
+  select( -SampleID_num) %>%
+  column_to_rownames(var = "sample")
+
+metadata.f.drought <- metadata.f.drought %>%
+  filter(rownames(.) %in% rownames(nmds_df))
+
+# PERMANOVA (marginal effects)
+distmat <- dist
+
+adonis2(distmat ~ Zone+Timepoint, metadata.f.drought, permutations = 999, by = "margin")
+# adonis2(formula = distmat ~ Zone + Treatment + Timepoint, data = metadata.f, permutations = 999, by = "margin")
+# Df SumOfSqs      R2      F Pr(>F)    
+# Zone       3    93141 0.14058 3.8404  0.001 ***
+#   Treatment  1    14685 0.02216 1.8164  0.021 *  
+#   Timepoint  2    20359 0.03073 1.2591  0.126    
+# Residual  66   533573 0.80532                  
+# Total     72   662563 1.00000   
+
+
+
+
+### nmds plot (timepoint and moisture)
+w=10
+h=8
+
+#plot zone and treatment
+make_nmds_plot(nmds_df, Group1 =Zone, Group2 =Timepoint,col_list=col_list)
+
 

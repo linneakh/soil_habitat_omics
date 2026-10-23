@@ -51,4 +51,12 @@ po/*~
 rsconnect/
 
 #FTICR data files are big
-./data/FTICR/
+data/FTICR/transformations_summary_all.csv
+data/FTICR/Report_processed_noNorm_MolecFormulas.csv
+data/FTICR/Report_processed_noNorm.csv
+
+#analysis not includedin publication
+scripts/not_included/
+figures/not_included/
+output/not_included/
+

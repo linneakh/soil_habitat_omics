@@ -142,9 +142,25 @@ plot_top_boxplot_r_d_per <- function(data, tax_col = "family",
                                      col_values = col_list,
                                      col_values2 = col_list_2,
                                      top_pct = 0.95,
+                                     min_samples = 2,          # NEW: min # samples per Habitat group
+                                     sample_col = "SampleID",  # NEW: name of your sample ID column
                                      title = title,
                                      group1 = NULL,  # single habitat e.g. "13C-Detritus"
                                      group2 = NULL) { # combined habitat e.g. "12C-Rhizo + 13C-Detritus"
+  
+  # Step 0: Drop taxa that don't have at least min_samples samples in EVERY Habitat
+  # (a taxon detected in only 1 sample within a given habitat gets dropped entirely,
+  # so it can't sneak through via a group where it happens to be well-sampled)
+  prevalent_taxa <- data %>%
+    filter(!is.na(sum) & sum > 0) %>%
+    group_by(.data[[tax_col]], Habitat) %>%
+    summarise(n_samples = n_distinct(.data[[sample_col]]), .groups = "drop") %>%
+    group_by(.data[[tax_col]]) %>%
+    filter(all(n_samples >= min_samples)) %>%
+    distinct(.data[[tax_col]]) %>%
+    pull(.data[[tax_col]])
+  
+  data <- data %>% filter(.data[[tax_col]] %in% prevalent_taxa)
   
   # Step 1: Identify top taxa by cumulative % of max median across groups
   top_fams <- data %>%
@@ -199,8 +215,6 @@ plot_top_boxplot_r_d_per <- function(data, tax_col = "family",
     )
   
   # Step 4: Calculate log2fc dataframe
-  
-  
   result_df <- data %>%
     filter(.data[[tax_col]] %in% top_fams) %>%
     group_by(Habitat, Moisture, .data[[tax_col]]) %>%
@@ -210,7 +224,6 @@ plot_top_boxplot_r_d_per <- function(data, tax_col = "family",
     mutate(log2fc = log2(.data[[group2]]) - log2(.data[[group1]])) %>%
     arrange(Moisture, desc(log2fc))
   
-
   # Step 5: Build log2fc plot ordered by log2fc within each Moisture facet
   log2fc_plot <- result_df %>%
     mutate(direction = case_when(
@@ -231,19 +244,16 @@ plot_top_boxplot_r_d_per <- function(data, tax_col = "family",
       panel.grid.minor = element_blank(),
       legend.title = element_blank()
     )
-
+  
   combined_plot <- result_plot | log2fc_plot  # | places side by side
-
+  
   return(list(
     combined_plot = combined_plot,
     boxplot = result_plot,
     log2fc_plot = log2fc_plot,
     log2fc_data = result_df
   ))
-  
-
 }
-
 
 
 #' Stacked proportional barplot colored by top N families per group

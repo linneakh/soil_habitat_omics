@@ -400,7 +400,9 @@ h_clean_emeta <- h_clean_emeta %>%
   group_by(Name) %>%
   summarise_if(is.numeric, max, na.rm = TRUE)
 
-
+#ensure emdata compound names match edata
+h_clean_emeta <- h_clean_emeta %>%
+  filter(Name %in% h_clean_edata$Name)
 
 
 
@@ -461,7 +463,7 @@ plot(myfilter, pvalue_threshold = 0.00000001, bw_theme = TRUE)
 
 # get vector of potential outliers
 potential_outliers <- summary(myfilter, pvalue_threshold = 0.00000001)$filtered_samples
-# Filtered Samples: DRIP_51.Drought.Rhizo.4weeks 
+# Filtered Samples: none
 
 
 # loop over potential outliers to generate plots
@@ -712,12 +714,19 @@ make_all_heatmaps(
   timepoint_colors       = timepoint_colors,
   outdir = outdir,
   #cluster_rows = TRUE,
-  label  = "other/lcms-h-met-all-timepoints",
+  label  = "met-all-timepoints",
   breaks = global_breaks
 )
 
 # ── Per timepoint ─────────────────────────────────────────────────────────────
 timepoints <- c("4weeks", "8weeks", "12weeks")
+
+#set k-values based on visual inspectiion of heatmaps and obvious major clusters
+k_values <- list(
+  "4weeks"  = 6,
+  "8weeks"  = 4,
+  "12weeks" = 4
+)
 
 for (tp in timepoints) {
   
